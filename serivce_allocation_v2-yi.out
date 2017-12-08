@@ -1,0 +1,36 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Background}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Multi-Objective Optimization}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Evolutionary Multi-objective Optimization}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Particle Swarm Optimization \(PSO\)}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Problem Description}{}% 6
+\BOOKMARK [1][-]{section.4}{BMOPSOCD for Web Service Location Allocation Problem}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Particle Representation}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.2}{Rounding Functions}{section.4}% 9
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Static Rounding Function}{subsection.4.2}% 10
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Dynamic Rounding Functions}{subsection.4.2}% 11
+\BOOKMARK [3][-]{subsubsection.4.2.3}{Stepped Rounding Function}{subsection.4.2}% 12
+\BOOKMARK [2][-]{subsection.4.3}{Fitness Function and Constraint Handling}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.4}{The BMOPSOCD algorithm for Web Service Location Allocation Problem}{section.4}% 14
+\BOOKMARK [1][-]{section.5}{Experiment Design}{}% 15
+\BOOKMARK [2][-]{subsection.5.1}{Comparison Design}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.2}{Test instances}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.3}{Performance Metrics}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.4}{Parameter Settings}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.5}{Experiments on Rounding Functions}{section.5}% 20
+\BOOKMARK [3][-]{subsubsection.5.5.1}{Static Rounding Function}{subsection.5.5}% 21
+\BOOKMARK [3][-]{subsubsection.5.5.2}{Result Analysis of Static Rounding Function}{subsection.5.5}% 22
+\BOOKMARK [3][-]{subsubsection.5.5.3}{Dynamic Rounding Function}{subsection.5.5}% 23
+\BOOKMARK [3][-]{subsubsection.5.5.4}{Comparison between Dynamic Rounding Functions}{subsection.5.5}% 24
+\BOOKMARK [3][-]{subsubsection.5.5.5}{Stepped Rounding Function}{subsection.5.5}% 25
+\BOOKMARK [3][-]{subsubsection.5.5.6}{Results for the Stepped Rounding function}{subsection.5.5}% 26
+\BOOKMARK [3][-]{subsubsection.5.5.7}{Combination of Static Function}{subsection.5.5}% 27
+\BOOKMARK [2][-]{subsection.5.6}{BMOPSOCD versus BNSPSO, NSGA-II, and BPSO}{section.5}% 28
+\BOOKMARK [1][-]{section.6}{Related Work}{}% 29
+\BOOKMARK [1][-]{section.7}{Conclusion and Future Work}{}% 30
+\BOOKMARK [1][-]{section*.15}{References}{}% 31
+\BOOKMARK [1][-]{IEEEbiography.0}{Biographies}{}% 32
+\BOOKMARK [2][-]{IEEEbiography.1}{Boxiong Tan}{IEEEbiography.0}% 33
+\BOOKMARK [2][-]{IEEEbiography.2}{Hui Ma}{IEEEbiography.0}% 34
+\BOOKMARK [2][-]{IEEEbiography.3}{Yi Mei}{IEEEbiography.0}% 35
+\BOOKMARK [2][-]{IEEEbiography.4}{Mengjie Zhang}{IEEEbiography.0}% 36

@@ -1,0 +1,916 @@
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+
+\usepackage{graphicx,amsmath,amsfonts,amstext,float,mathtools,hyperref,multicol,array,amssymb}
+%\usepackage[ruled,vlined]{algorithm2e}
+
+\usepackage{algorithm, algpseudocode}
+%\usepackage{psfig)
+
+%\usepackage{kbordermatrix}
+
+%\usepackage[para,online,flushleft]{threeparttable}
+\usepackage{subcaption}
+%\usepackage{float}
+%\usepackage{epsfig}
+%\usepackage{subfigure}
+%\newfloat{fig}{thp}{lof}[chapter]
+\floatname{fig}{Figure}
+
+\let\bbordermatrix\bordermatrix
+%\patchcmd{\bbordermatrix}{8.75}{4.75}{}{}
+%\patchcmd{\bbordermatrix}{\left(}{\left[}{}{}
+%\patchcmd{\bbordermatrix}{\right)}{\right]}{}{}
+
+%\usepackage{float}
+
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+
+%\usepackage{flushend}
+\ifCLASSOPTIONcompsoc
+  \usepackage[nocompress]{cite}
+\else
+  \usepackage{cite}
+\fi
+\ifCLASSINFOpdf
+\else
+\fi
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\begin{document}
+
+\title{Evolutionary Multi-Objective Optimization for Web Service Location Allocation}
+
+
+\author{Boxiong~Tan,
+        Hui~Ma,
+        Yi~Mei,
+        and~Mengjie~Zhang
+\IEEEcompsocitemizethanks{\IEEEcompsocthanksitem School of Engineering and Computer Science, Victoria University of Wellington,
+PO Box 600, Wellington 6140, New Zealand.\protect\\
+E-mail: \{boxiong.tan, hui.ma, yi.mei, mengjie.zhang\}@ecs.vuw.ac.nz}
+\thanks{Manuscript received x x, x; revised x x, x.}}
+
+% The paper headers
+\markboth{IEEE Transactions on Services Computing, ~Vol.~\textless XX\textgreater, No.~\textless 000\textgreater, \textless Month\textgreater~2016}%
+{da Silva \MakeLowercase{\textit{et al.}}: Evolutionary Multi-Objective Optimization for Web Service Location Allocation}
+
+
+
+\IEEEtitleabstractindextext{
+\begin{abstract}
+With the ever increasing number of functional similar web services being available on the Internet, the market competition is becoming intense. Web service providers realized that good Quality of Service (QoS) is a key of business success and low network latency is a critical measurement of good QoS. Because network latency is related to geometric location,
+a straightforward way to reduce network latency is to allocate services to proper locations. Hence, it is necessary to provide an effective web services allocation algorithm to WSPs. In this paper, we model the Web service location allocation problem as a multi-objective optimization problem - minimizing overall network latency and total cost. We develop a new PSO-based algorithm with rounding function approach to provide a set of quality of solutions. The result shows that the new algorithm could provide diverse solutions. In addition, the new algorithm has good
+performance regardless of increasing problem size.
+\end{abstract}
+
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+Web service location allocation, Quality of Service, Evolutionary Computation, Particle Swarm Optimization.
+\end{IEEEkeywords}}
+
+
+% make the title area
+\maketitle
+\IEEEdisplaynontitleabstractindextext
+\IEEEpeerreviewmaketitle
+
+\IEEEraisesectionheading{\section{Introduction}\label{sec:introduction}}
+
+\IEEEPARstart{I}{n} recent years, service-oriented computing (SOC) enables software applications to be developed in an agile and cost efficient way \cite{Dan:2008}. Web services are well defined, self-contained modules that provide standard business functionality and can be accessed via the Internet \cite{Ran}. With the ever increasing number of functional similar web services being available on the the Internet, the Web Service Providers (WSPs) are trying to improve the quality of service (QoS) to become competitive in the market.
+QoS, also known as non-functional requirements to  web service, is the degree to which a web service meets specified requirements or user needs \cite{4061431}, such as response time, security and availability. Among numerous QoS measurements, service response time is a critical factor for many real-time services, e.g. traffic service or finance service.
+
+Service response time has two components: transmission time (variable with message size) and network latency \cite{Johansson}. Study \cite{916684} shows that network latency is a significant component of web service response delay. Ignoring network latency will underestimate response time by more than 80 percent \cite{Sun}. To reduce the network latency, large web service providers like Google, Facebook or Microsoft have their own high-bandwidth data centers. The majority of WSPs can not afford to build a data center, therefore they rent servers provided by Web Server Hosting Providers (WSHPs). WSPs need to allocate their services wisely so that the overall network latency is minimized. According to a popular web traffic analyzing company Alexa, 96\% of top one million web services were hosted in heterogeneous server clusters or co-location centers \cite{He} that were widely distributed across different geographic regions. Hence, it is necessary to provide an effective web services allocation guide to WSPs so that they can be benefited. This gives rise of the Web service location allocation (WSLA) problem.
+
+
+The WSLA is a very challenging problem. It is NP-hard due to its huge searching space \cite{Vanrompay}. Therefore, it is impractical to find the optimal solution when the number of services and the locations are huge.  The WSLA problem is essential a multi-objective optimization problem \cite{Multiobjective} for which there are two conflicting objectives, to minimize latency and total cost. Multi-objective Evolutionary Optimization Algorithm (MOEA) methodologies are ideal for solving multi-objective optimization problems \cite{key:article}, since MOEAs work with a population of solutions. With an emphasis on moving towards the true Pareto-optimal region, a MOEA algorithm can be used to find multiple Pareto-optimal solutions in one single simulation run \cite{OptimizationElectrical}.
+
+Previous researches \cite{Aboolian, Sun} use traditional approaches, i.e., integer programming and greedy algorithm, to solve this problem. However, there are two drawbacks with these approaches. Firstly, they suffers the scalability problem when problem size increases to large \cite{Hwang11aninteger}. Secondly, they treat the WSLA problem as a single-objective problem and generate one solution assuming services providers' preferences are given. To address the drawbacks of traditional approaches, various multi-objective evolutionary optimisation algorithms have been proposed.  \cite{godinez2010,hassan2005} discover that Particle Swarm Optimization (PSO)-based multi-objective optimization algorithms has the same or better effectiveness as the Genetic Algorithm (GA)-based multi-objective optimization algorithms but with significantly better computational efficiency (less function evaluations). Therefore, PSO-based algorithms are considered to solve the WSLA problem.
+
+In our previous work \cite{tan2016evocop} on Web service location allocation, we study the performance of applying three algorithms,  Binary PSO (BPSO), Non-Dominated Sorting PSO (NSPSO),  and NSGA-II (a Genetic Algorithm (GA)-based multi-objective optimization algorithm) to the problem of WSLA. We find that there are two major shortcomings in BPSO, NSPSO and NSGA-II. The first one is their performances drop rapidly when the problem size increases. The second shortcoming is that the solutions are not diverse enough. Multi-objective particle swarm optimization with crowding distance (MOPSOCD) is developed in \cite{Raquel} to produce a well-distributed set of non-dominated solutions. MOPSOCD has two desired features: archive and mutation. These features make the algorithm to have  a strong ability to avoid being stuck at local optima while maintaining an uniformly non-dominated set. Based on MOPSOCD, in this paper we develop a new binary multi-objective PSO with crowding distance approach (BMOPSOCD) to solve the WSLA problem.  To adapt the original MOPSOCD to solve our WSLA problem, which is a discrete problem, we introduce a new mechanism of rounding. The rounding function method is a mechanism that makes a continuous algorithm compatible with discrete problems.
+
+The overall goal is to develop a new binary multi-objective PSO-based approach to the WSLA problem by considering two potentially conflicting objectives - minimizing cost and minimizing network latency. To accomplish this goal, we will achieve the following objectives:
+\begin{enumerate}
+  \item To design rounding strategies for transforming continuous PSO to binary PSO;
+  \item To develop a new multi-objective PSO approach that can produce a set of solutions with good diversity and can perform well when problem sizes increase;
+ \item To evaluate our proposed approach by comparing it with previous approaches using some experiments.
+\end{enumerate}
+
+
+The paper is organized as follows. Section \ref{sec:related} reviews existing works and various PSO approaches and provides background knowledge of solving the problem. Section \ref{sec:prelimminary} describe the WSLA problem with formal models.  Section \ref{sec:methods} presents our approach of BMOPSOCD. Section \ref{sec:conclution} provides a conclusion and discusses future work.
+
+\section{Background}\label{sec:related}
+
+
+\subsection{Related Work}
+
+Most of the researchers treat WSLA problem as a single objective problem. \cite{Aboolian, Sun} try to solve the problem by using integer linear programming techniques. In particular, \cite{Sun} solves this problem by employing greedy and linear relaxation. Researches on network virtualization \cite{export:149565,export:141114} employs greedy algorithms to allocate virtual machines (VMs) in the data center so that the requirements of network bandwidth are met. \cite{6217521} presents a multi-layer and integrated fashion through a convex integer programming formulation. The major drawback of greedy algorithm is that it is easy to be stuck at local optima. Integer linear programming is well-known as not scaling very well. It performs poorly when the number of variables is large.
+
+
+Huang \cite{EnhancedGenetic} proposes an enhanced genetic algorithm (GA)-based approach on WSLA. He models the problem as a single objective problem with respect to network latency. In particular, the position of a web service in a Web service composition workflow is considered in his model. Kessaci \cite{6557869} proposes MOGA-CB for minimizing cost of VMs instance and response time. \cite{Phan8} proposes a framework - Green Monster, to dynamically move web services across Internet data centers for reducing their carbon footprint while maintaining their performance. Green monster applies a modified version of NSGA-II algorithm \cite{996017} with an additional local search process.
+
+
+As shown from above previous researchers have studied the WSLA problem with single-objective algorithm, linear programming technique and greedy algorithm. These approaches have many obvious disadvantages. WSLA problem in nature is a multi-objective problem which should be addressed by multi-objective algorithms. In our previous work \cite{tan2016evocop} we develop two PSO-based approaches, one with weighted-sum fitness function (named WSPSO), and the other using the fast Non-dominate sorting scheme (named NSPSO), for solving the WSLA problem. We study the performance of WSPSO, NSPSO and that of NSGA-II, one of the most commonly used multi-objective genetic algorithms with experimental evaluations. Our evaluation results show that both WSPSO and NSPSO outperform NSGA-II while NSPSO achieved a more diverse set of solutions that WSPSO. However, the performance of all the three approaches decrease while working on large datasets.
+
+
+%From previous study, we found MOEAs are promising. Specifically, among many MOEAs, multi-objective particle swarm optimization with crowding distance (MOPSOCD) is a recent development. It outperforms other approaches including NSGA-II, PAES in various aspects.
+% Therefore, we decide to further improve the MOPSOCD and solve Web service location allocation problem with it.
+
+
+\subsection{Particle Swarm Optimization (PSO)}
+PSO was proposed by Kennedy and Eberhart in 1995 \cite{488968}. It is a population-based meta-heuristic algorithm inspired by the social behavior of birds and fishes. In PSO, each individual is called a particle which flying around the search space. The underlying phenomenon of PSO is optimized by social interaction where particles sharing information to direct their movement.
+
+PSO is based on the principle that each solution can be represented as a particle. At initial state, each particle has a random initial position in the search space which is represented by a vector $x_i = (x_{i1}, x_{i2}, \dots, x_{iD})$, where \emph{D} is the dimensionality of the search space. Each particle has a velocity, represented as $v_i = (v_{i1}, v_{i2}, \dots, v_{iD})$ which is limited by a predefined maximum velocity, $v_{max}$ and  $v_{id}$ $\in$ $[-v_{max}, v_{max}]$. During the search process, each particle maintains a record of previous best performance, called $pbest$. The best position of its neighbors is also recorded, which is $gbest$. The position and velocity of each particle are updated according to the following equations:
+
+\begin{equation}
+	x^{t+1}_{id} = x^{t}_{id} + v^{t+1}_{id}
+\end{equation}
+\begin{equation}
+	v^{t+1}_{id} = w * v^{t}_{id} + c_1 * r_{1i} * (p_{id} - x^t_{id}) + c_2 * r_{2i} * (p_{pg} - x^i_{id})
+\end{equation}
+
+In the two equations, $t$ shows the $t^{th}$ iteration. \emph{d} $\in$ \emph{D} shows the $d^{th}$ dimension. \emph{w} is the inertia weight used to balance the local search and
+global search abilities of PSO. $c_1$ and $c_2$ are acceleration constants. $r_{1i}$ and $r_{2i}$ are random constants uniformly distributed in $[0, 1]$. $p_{id}$ and $p_{gd}$ denote the values of $pbest$ and $gbest$ in $d^{th}$ dimension.
+
+PSO was originally developed to address continuous optimization problems with a single objective. The representation for both position and velocity of a particle in PSO is a vector of real numbers. However, this representation is not suitable for many discrete optimization problems. To address the discrete problem, in 1997 Kennedy and Eberhart developed a binary particle swarm optimization (BPSO) \cite{637339}. In BPSO, the position of each particle is a vector of binary numbers, which are restricted to 1 or 0.
+
+
+Several multi-objective optimization algorithms are based on PSO such as Multi-objective PSO (MOPSO) \cite{1304847}, and Non Dominated Sorting PSO (NSPSO) \cite{NSPSO}. \cite{1304847} studies the performance of four multi-objective algorithms,   NSGA-II \cite{996017}, PAES \cite{knowles2000}, Micro-GA \cite{Micro} and MOPSO, and shows that MOPSO is most capable to generate the best set of non-dominated solutions close to the true Pareto front but with low computational cost. To improve the diversity of non-dominated solutions, Raquel et al. \cite{Raquel} propose a MOPSOCD extended from the MOPSO. The mechanism of crowding distance is incorporated into the algorithm on global best selection of an external
+archive of non-dominated solutions. Due to its competitive of generating a well-distributed set of non-dominated solutions, in this paper we apply MOPSOCD to solve the WSLA problem.
+
+%Pareto front approach was first introduced by Goldberg in \cite{goldberg1988genetic}. Goldberg suggested to use nondominated ranking and selection to move a population to the Pareto front. This idea currently is the mainstream in MOEA.
+
+%NSGA-II is a multi-objective algorithm based on genetic algorithm (GA). It was proposed by Klyanony et.al \cite{996017} in 2002. NSGA-II performs well in convergence and permits a remarkable level of flexibility. It has four innovative properties, a fast non-dominated sorting procedure, an elitist strategy, a parameterless approach and an efficient constraint-handling method.
+
+
+
+\section{Preliminary} \label{sec:prelimminary}
+
+In this work we considers the WSLA as a multi-objective problem with two potentially conflicting objectives, minimizing cost and network latency. In this section, we first describe the WSLA problem in detail.  Then we introduce matrices for modelling the input and output information of the problem.
+
+To solve the WSLA problem we consider a set of user centers $\mathcal{U }= \{U_1, \dots, U_m \}$ and a set of candidate locations $\mathcal{A} = \{A_1, \dots, A_n\}$. A user center can be a centre location of a user-centered area. Candidate locations are the geographic location that are suitable to deploy Web services, e.g., the locations of servers hosting Web services. A service providers need to deploy a set of Web services $\mathcal{W} = \{W_1, \dots, W_s\}$, each of which to be deployed to at lease one location. Note that a Web service can be deployed to multiple locations for the benefit of reducing service response time. For each Web service $W_i \in \mathcal{W}$ and each candidate location $A_j \in A$, there is a deployment cost $C_{ij}$ induced by deploying service $W_i$ to location $A_j$. For each user centre $U_k \in \mathcal{U}$ and each candidate location $A_j \in \mathcal{A}$, there is a latency $L_{jk}$, which affects the response time from the location $A_j$ to the user center $U_k$. It normally depends on the distance between two geographical locations. Each Web service is invoked from a user center $U_k \in \mathcal{U}$ with an invocation frequency $F_{ik}$. Given the information above, WSLA is to design an allocation plan that allocate a set of services $\mathcal{W} = \{ W_1, W_2, \dots,  W_s\}$  to set of candidate locations $\mathcal{A}= \{ A_1, A_2, \dots,  A_n \}$ so that the total deployment cost $f_1$ and network latency $f_2$ is minimized. Total deployment cost $f_1$ and total network latency $f_2$ can be calculated as follows:
+
+\begin{equation} \label{eq:fit-cost}
+\begin{aligned}
+& & &  f_1 = \sum\limits_{1=1}^s \sum\limits_{j = 1}^n C_{ij} x_{ij},
+\end{aligned}
+\end{equation}
+
+\begin{equation} \label{eq:fit-latency}
+\begin{aligned}
+& & & f_2 = \sum\limits_{i= 1}^s \sum\limits_{k=1}^m F_{jk} r_{ik}
+\end{aligned}
+\end{equation}
+
+\noindent where $x_{ij}$ takes 1 if service $W_i$ is allocated to location $A_j$, and 0 otherwise. $r_{ik}$ stands for the response time of service $W_i$ to the center $U_k$, which is calculated as
+
+{\centering
+	\begin{equation}
+	\label{eq:response}
+		r_{ik} = \min\{L_{jk} \mid j \in \{1, 2, ..., k\} \text{ and } x_{ij} = 1\}
+	\end{equation}
+\\}
+
+
+
+WSLA has the following two objective functions and one constraint.
+\begin{equation} \label{eq:cost}
+\begin{aligned}
+& {\text{minimize}}
+& &  f_1 = \sum\limits_{1=1}^s \sum\limits_{j = 1}^n C_{ij} x_{ij},\\
+\end{aligned}
+\end{equation}
+
+
+\begin{equation}
+\begin{aligned} \label{eq:latency}
+& {\text{minimize}}
+& & f_2 = \sum\limits_{i= 1}^s \sum\limits_{k=1}^m F_{ik} r_{ik},\\
+\end{aligned}
+\end{equation}
+
+
+\begin{equation} \label{eq:constraint}
+\begin{aligned}
+& \text{subject to}
+%& & \displaystyle \sum_{j} a_{sj} \geqslant 1
+& &  \sum_{j=1}^n x_{ij} \geqslant 1, \forall i \in {1, \cdots, s}\\
+& & & x_{ij} \in {0, 1}, \forall i \in {1, \cdots, s}, \forall j \in {1, \cdots, n}
+\end{aligned}
+\end{equation}
+
+
+In this paper, we will use the following matrices to model the above mentioned information.
+\begin{center}
+{
+%\centering
+	\footnotesize
+	\begin{tabular}{l*{2}{l}r}
+		\hline
+		\textbf{Matrices} \cr
+		$L$ & server network latency matrix $L = \{L_{jk}\}$ \cr
+		$A$ & service location matrix $X = \{x_{ij}\}$ \cr
+		$F$ & service invocation frequency matrix $F = \{F_{ik}\}$ \cr
+		$C$ & cost matrix $C = \{C_{ij}\}$ \cr
+		$R$ & user response time matrix $R = \{r_{ik}\}$ \cr
+		\hline
+	\end{tabular}
+\\
+}
+\end{center}
+
+
+
+A \emph{service invocation frequency matrix}, $F= [F_{ik}]$, is used to record services invocation frequencies from user centers to services. A \emph{cost matrix}, $C = [C_{ij}]$, is used to record the fixed deployment fees at candidate locations, where $C_{ij}$ is an integer that indicates the fixed deployment fee at a candidate location. A \emph{service location matrix} $X = [x_{ij}]$ represents location allocation plan, with $x_{ij}$ representing wether a service $W_i$ is deployed at a candidate location $A_j$ or not. That is,
+
+$$
+		a_{ij} =
+		\begin{cases}
+			1 & \quad \text{service } s \text{ deploy in location } j\\
+			0 & \quad \text{otherwise} \\
+		\end{cases}
+$$
+
+For each given service location allocation matrix,  A \emph{response time matrix}  $R = [r_{ik}]$ can be computed to get the shortest response time of accessing service $W_i$ from user center $U_k$. The aim of WSLA is find a location allocation matrix $X = [x_{ij}]$ such that it results minimal overall network latency and overall deployment cost.
+
+For example assume we are given the following matrices, $F, L, C $ we can calculate total cost and latency for a given allocation plan represented by the allocation matrix $X$ below.\\
+ \parbox{.4\linewidth}{
+ {\centering
+%   \begin{equation*}
+\begin{displaymath}
+\begin{aligned}
+ F = \bbordermatrix{~ &  &  &   \cr
+ 						&120 &35 &56	\cr
+ 						&14  &67 &24 \cr
+ 						&85 &25 &74 \cr}
+\end{aligned}
+%\end{equation*}
+\end{displaymath}
+ \\}
+ }
+ \parbox{.4\linewidth}{
+ {\centering
+ \begin{equation*}
+\begin{aligned}
+ L = \bbordermatrix{~ &  &  &  \cr
+ 						&0 &5.776 &6.984	\cr
+ 						&5.776  &0 &2.035 \cr
+ 						&0.984 &1.135	&2.3 \cr}
+\end{aligned}
+\end{equation*}
+ \\}
+ }
+
+% For example, the network latency between user center $i_{2}$ with candidate location $j_{1}$ is 5.776s. These data could be collected by monitoring network latencies \cite{6076756} \cite{5552800}.
+
+
+%For example, $c_{12} = $ 80 denotes the cost of deploying service $s_{1}$ at candidate location $j_{2}$ is 80 cost units.
+%
+ \parbox{.40\linewidth}{
+ {\centering
+ \begin{equation*}
+\begin{aligned}
+ C = \bbordermatrix{~ &  &  & \cr
+ 						&130 &80 &60\cr
+ 						&70  &50 &30\cr
+ 						&40 & 78 &54\cr}
+ \end{aligned}
+\end{equation*}
+\\ }
+ }
+ \parbox{.40\linewidth}{
+ {\centering
+ \begin{equation*}
+\begin{aligned}
+ X = \bbordermatrix{~ &  &  & \cr
+ 						&0 &1 &0	\cr
+ 						&0  &0 &1	\cr
+ 						&1 &1 &0	\cr}
+\end{aligned}
+\end{equation*}
+ \\}
+ }
+
+We can use the two example matrices $L$ and $X$ presented above to construct the response time matrix $R$. For each service $W_i$, by checking matrix $X$, we can find out which location the service has been deployed. Then we check matrix $L$, to find out its corresponding latency to each user center $U_k$. If there is more than one location, then the smallest latency is selected.
+
+$f_1$ calculates the overall cost of deployed services, where $C_{ij}$ is the cost of deployed service $W_i$ at candidate location $A_j$, $x_{ij}$ represents whether service $W_i$ is allocated to candidate location $A_j$. The sum of the multiplication of $C_{ij}$ and $x_{ij}$ is the total deployment cost.%\end{flushleft}
+
+\begin{flushleft}We can calculate total cost using the above matrices $C$ and $A$.\end{flushleft}
+   \begin{equation*}
+       \begin{aligned}
+ 	f_1 &= C_{11} * x_{11} + C_{12} * x_{12} + C_{13} * x_{13} + ... + C_{33} * x_{33} \\
+ 	&= 130 * 0 + 80 * 1 + 60 * 0 + ... + 54 * 0 \\
+ 	&= 228
+       \end{aligned}
+   \end{equation*}
+
+We can compute the response time matrix $R = [r_{ik}]$ as the following, with $r_{ik}$ denotes the shortest response time from service $W_i$ to a user center $U_k$ and $F_{ik}$ is the invocation frequency of service $W_i$ from user center $U_k$
+
+ {\centering
+ $
+ R = \bbordermatrix{~ &  &  &  \cr
+ 						&5.776 & 0  & 2.035	\cr
+ 						&0.984  & 1.135 & 2.3	\cr
+ 						&0 & 0 & 2.035	\cr}
+ $
+ \\}
+
+\noindent Finally, we can compute the overall network latency $f_2$ using matrix $F$ and $R$.
+\begin{equation*}
+\begin{aligned}
+ 	f_2 &= F_{11} * r_{11} + F_{12} * r_{12} + F_{13} * r_{13} + ... + F_{33} * r_{33} \\
+ 	&= 120 * 5.776 + 35 * 0  + 56 * 2.035  + ... + 74 * 2.035\\
+ 	&= 1102.691
+\end{aligned}
+\end{equation*}
+
+The constraint requires that each web service is deployed in at least one location. The example matrix $X$ above satisfies the constraint.
+
+
+\section{BMOPSOCD for Web Service Location Allocation} \label{sec:methods}
+
+In this section we present our approach of BMOPPSOCD to solve the WSLA problem. We first define the representation of the problem followed by different rounding methods that transform a continuous representation to a binary representation. We will then present fitness functions to be used, and our method of handling the constraint followed by our proposed BMOPPSOCD algorithm for WSLA.
+
+\subsection{Particle Representation}
+
+As we see from above that WSLA is to design a location allocation matrix $X =[x_{ij}]$, where $i = 1,...,s$ and $j=1,...,n$.  The major difference between BMOPSOCD and three previous approaches, WSPSO, NSPSO and BMOPSOCD,  is the particle representation. As mentioned in Section \ref{sec:prelimminary}, the solution of WSLA is a $x \times n$ matrix. As we known that PSO can be used to generate vector-based solutions, we need to transform the $x \times n$ matrix into a  $(x \times n)$ vector $y$. The element $x_{ij}$ in $X$ corresponds to the $ (n \cdot (i-1) +j)^{th}$ element $y_u$ in $Y$. Also, for continuous PSO, each element of a particle takes value from 0 to 1, i.e., $0 \leq  y_u  \leq 1$.  For example, the following $3 \times 3$ matrix
+
+ \begin{equation*}
+\begin{aligned}
+ X = \bbordermatrix{~ &  &  & \cr
+ 						&0.12 &0.87 &0.42	\cr
+ 						&0.07  &0.32 &0.95	\cr
+ 						&0.76 &0.64 &0.27	\cr}\\
+\end{aligned}
+\end{equation*}\\
+
+\noindent can transformed into a vector:\\ $Y = [0.12, 0.87, 0.42, 0.07, 0.32, 0.95, 0.76, 0.64, 0.27]$.
+
+As we know that the final output of WSLA is an allocation matrix with $x_{ij}$  as a binary value, the particle with the continuous representation needs to be transformed into the binary representation, using a rounding methods. The way of rounding is significant to the quality of the final results. In the following sections we will discuss different rounding methods. Note that, Vector $Y$ is used in the update phase of our PSO-based algorithm. During the fitness evaluation phase, $Y$ is first decoded into matrix $X$ with a selected rounding algorithm.
+
+% \begin{figure}[H]
+% \centering
+%   \includegraphics[width=0.35\textwidth]{pics/flatten.eps}
+%   \caption{BMOPSOCD particle representation}
+%   \label{fig:flatten}
+% \end{figure}
+
+
+\subsection{Rounding Functions}
+
+The original MOPSOCD is designed as a continuous version PSO. Instead of changing the particle to a binary representation, we still use the continuous representation. In order to be compatible with the binary problem, the continuous representation particle needs  to be transformed to a binary representation during the process of fitness evaluation. That is, in the initial stage, particles are initialized in real values. The updates of velocity and position are performed as usual. To evaluation the fitness of particles, particles in continuous representation need to transformed to the particles in binary representation, which can then be evaluate fitness functions.
+
+The rounding function is used to map a real value particle to a discrete value particle. The common strategy is to round a real value to its closest integer number. The round-down strategy is adopted in \cite{1004478} to solve integer programming problem. \cite{4120263} uses a real value representation of chromosome for GA. Then, a eal value chromosome is rounded to an integer and binary representations in order to achieve a mixed integer optimization of array antenna pattern and micro-strip antenna. \cite{liu2013discrete} adopts rounding and interval mapping strategy to solve 0-1 discrete, integer optimization and mixed optimization problem. \cite{Anghinolfi200973} uses a random-round function which randomly returns round-up value or round-down value.
+
+
+
+\subsubsection{A Static Rounding Function}
+
+A static rounding function is a straightforward strategy. A parameter threshold $t$ is introduced in the static rounding function.
+The value of a particle entry is either round up or round down according to $t$.
+The threshold value $t$ is rather ad-hoc that based on empirical study.
+ \begin{equation}
+ 	\label{eq:1}
+ 	x_{ij} =
+ 	\begin{cases}
+ 		1 & \quad \text{if } x'_{ij} > t \\
+ 		0 & \quad \text{otherwise} \\
+ 	\end{cases}
+ \end{equation}
+
+
+\subsubsection{Dynamic Rounding Functions}
+\label{sec:dynamic}
+The threshold plays an important role in searching for solutions for a given problem. The static rounding function has the following drawbacks. Firstly, the parameter threshold $t$ needs to be predefined. The value of threshold $t$ is problem specific, therefore, it is hard to estimate the performance before obtaining the results. Secondly, the influence of different threshold values are not completely studied. Because of the above reasons, a dynamic rounding threshold is proposed. A dynamic rounding function has two steps. In the first step, it adjusts the value of threshold $t$ according to the current generation. In the second step,  same as static rounding function, it either rounds up or rounds down the value of $x_{ij}$ according to $t$. Three dynamic rounding functions are considered. Equation \ref{eq:linear} is a \emph{linear function}. Equation \ref{eq:quadratic} is a \emph{quadratic function}. Equation \ref{eq:reciprocal} is a \emph{reciprocal function}.
+\begin{equation}
+\label{eq:linear}
+ t = \frac{l - u}{\text{max\_gen}} g + u
+\end{equation}
+
+\begin{equation}
+\label{eq:quadratic}
+ t = \frac{l - u}{(\text{max\_gen})^2} g^2 + u
+\end{equation}
+
+\begin{equation}
+\label{eq:reciprocal}
+ t = u - \frac{u - l}{\text{max\_gen} - g}  (g \neq \text{max\_gen})
+\end{equation}
+
+The reason that we design three dynamic functions is that we would like to compare the impact of different trajectories of dynamic thresholds. $t$ is the value of threshold, $g$ is the current generation. The lower boundary of a threshold is $l$, upper boundary is $u$. They are predefined. The performance of these rounding functions is studied in the Section \ref{sec:expdy}.
+
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.35\textwidth]{pics/dynamic.eps}
+  \caption{Curve of three dynamic thresholds}
+  \label{fig:dynamic}
+\end{figure}
+%
+% The parameter $threshold$ is an empirical parameter that introduced into the algorithm.
+\subsubsection{An Adaptive Threshold Approach}
+\label{sec:transfer}
+% As the problem becomes getting larger and larger, the performance of evolutionary computation drops.
+Human have the ability to learn a technique or knowledge and apply in different fields.
+As the dimensionality of the problem increases, the performance of evolutionary computation drops.
+It is necessary to build a system that has the ability to reuse the learned knowledge.
+Transfer learning is a process to reuse the knowledge in solving unseen tasks \cite{olivas}.
+In this section, we propose an adaptive threshold that embodied in the transfer learning process.
+
+Figure \ref{fig:adaptive} shows the evolutionary process with an adaptive threshold. % The idea of transfer learning is inspired by \cite{Verbancsics}.
+Initially, the threshold $t$ is set to a upper boundary $u$ (e.g. 0.7). Then the PSO runs with this setting for a predefined interval $i$ (e.g. 10 generations). In the beginning of next interval (e.g. 11 generation), the threshold $t$ is changed according to Equation \ref{eq:transfer} and remain steadily until next interval. This process is repeated until the lower boundary $l$ is reached. The optimization may look like forcing the swarm ``jump'' to a different area. But the process is equivalent to initializing a new set of population with the old one. Therefore, the knowledge are inherited. An underlying assumption is that, if the particle swarm could converge within an interval $i$, then it is better to explore a different direction. Therefore, in the next interval, the swarm will explore a slightly different area and is directed by an adjacent threshold value. The potential problem of the method is that it is hard to know whether the PSO is converged. The transfer learning rounding function is shown in Equation \ref{eq:transfer} where $t'$ denotes the current threshold value.
+
+\begin{figure}[H]
+ \centering
+   \includegraphics[width=0.4\textwidth]{pics/transfer.eps}
+   \caption{Evolutionary process with an adaptive threshold}
+   \label{fig:adaptive}
+ \end{figure}
+
+\begin{equation}
+\label{eq:transfer}
+		t =
+		\begin{cases}
+		= t' - \frac{u - l}{(\frac{\text{max\_gen}}{i} - 1)} & \quad \text{if } (\text{cur\_gen} \mod i) = 0\\
+		= t' & \quad \text{otherwise} \\
+		\end{cases}
+\end{equation}
+
+
+
+\subsection{Fitness Function and Constraint Handling}
+
+After particles represented as vectors being transformed to allocation matrices, two fitness functions Equation \ref{eq:fit-cost} and \ref{eq:fit-latency}  are used to evaluate fitness of particles that represents location allocation plans. Based on the fitness of solutions a set of non-dominant solutions are returned.
+
+As we see in Section \ref{sec:prelimminary}, WSLA needs to satisfy the constraint defined as Equation. \ref{eq:constraint}, which means each service needs to be allocated to at least one location. However, during the searching process of PSO, the constraint can be violated. That is, infeasible particles may be generated during the process of searching.
+
+%As in \cite{tan2016evocop}, we employ a penalty method, named \emph{death penalty}, to assign infeasible particles the highest possible fitness values. Specifically,
+
+%\begin{equation*}
+%\hat{f}_i(Y) =
+%		\begin{cases}
+%			\hat{f}_i(Y)  & \quad \text {if } $Y$ \text{ is feasible}\\
+%			1 & \quad \text{otherwise} \\
+%		\end{cases}, i = 1, 2.
+%\end{equation*}
+
+The constraint handling method used by BMOPSOCD is a ranking of violations. A solution $I$ is considered to constraint-dominate a solution $J$ if any of the following conditions is true:
+\begin{enumerate}
+ \item Solution $I$ is feasible, solution $J$ is not,
+ \item Both solutions are infeasible, solution $I$ has less violations,
+ \item Both solutions are feasible, solution $I$ dominates solution $J$.
+\end{enumerate}
+
+The particle with less violations is always considered as  a better solution. If there is only one constraint, this constraint handling method provides similar effect with the death penalty method.
+
+\subsection{The BMOPSOCD algorithm for Web Service Location Allocation}
+
+Algorithm \ref{alg:BMOPSOCD} presents our BMOPSOCD algorithm for solving the WSLA problem. As seen in the algorithm, the selection of $pbest$ and $gbest$ is one of the key steps in BMOPSOCD. $pbest$ is the personal best solution of each particle in population. The $pbest$ is updated only if the new particle dominates the current one, otherwise it remains unchanged. In the BMOPSOCD, any non-dominated solutions in the archive can be a $gbest$. Therefore, it is important to ensure that the particles move to an unexplored area. The $gbest$ is selected from non-dominated solutions with highest crowding distance value. It ensures the swarm to move to a least crowded area.
+
+
+\begin{algorithm}[!htb]
+	\caption{BMOPSOCD for WSLA}
+	\footnotesize
+	\textbf{Inputs:} \\
+		Cost Matrix $C$, \\
+		Server network latency matrix $L$, \\
+		Service invocation frequency matrix $F$ \\
+	\textbf{Outputs:}
+		Pareto Front: the $Archive$ set
+
+	\begin{algorithmic}[1]
+		\State Initialize a population $P$ with random real values $\in$ (0, 1)
+		\State Initialize $v_i$ = 0
+		\State \textbf{For each individual $i$ in $P$ Rounding and Evaluating fitness}
+		\State Initialize $pbest$ of each individual $i$.
+		\State Initialize $gbest$
+		\State Initialize $Archive$ with non-dominated vectors in $P$
+
+		\Repeat
+			\State Compute the crowding distances of each solution $i$ in $Archive$
+			\State Sort solutions in $Archive$ in descending crowding distances
+			\For ( each particle)
+				\State Randomly select the global best guide for $P[i]$ from a specified top portion of the sorted archive $A$ and store its position to $gbest$.
+				\State Compute the new velocity $v_i$
+				\State Update its position $x_i$
+				\State If it goes beyond the boundaries, then multiply its velocity by -1
+				\State If ($t < (MAXT * PMUT)$), apply Mutation
+				\State \textbf{Rounding and Evaluating fitness}
+				\State Update its $pbest$
+				\EndFor
+		\State Insert new non-dominated solution into $Archive$, remove dominated solutions from $Archive$
+		\Until{ maximum iterations is reached}
+		\State return $Archive$
+	\end{algorithmic}
+	\label{alg:BMOPSOCD}
+\end{algorithm}
+
+The fitness of particles can be evaluated using the fitness functions presented in Equation  \ref{eq:fit-cost} and \ref{eq:fit-latency}. Line 12 updates velocity $v_i$ as:
+
+\begin{equation}
+	v_{id} = w * v_{id} + c_1 * r_{1i} * (p_{id} - x_{id}) + c_2 * r_{2i} * (p_{pg} - x_{id})
+\end{equation}
+\noindent $w$ is the inertia weight, $c_1$ and $c_2$ are the acceleration factors, $r_{1i}$ and $r_{2i}$ are the random variables sampled from uniform distribution between 0 and 1, $v_{id}, x_{id}, p_{id}$ and $g_{d}$ denote the value in dimension $d$ of $v_i, x_i, p_i$ and $g$, respectively.  Note that the main difference between our algorithm and the original one is in Line 3 to 16, which is the rounding function that transforms the continuous vector to a binary one. For WSLA, the decision variable is binary, 0 or 1. Therefore, in our algorithm (Line 3 and 16) we apply a rounding function to transform continuous values to binary values.
+
+
+
+%\section{Experiment Design}
+
+\section{Experiment Design} \label{sec:experiment}
+\label{sec:exp}
+
+The aim of this study is to propose a multi-objective WSLA approach which can produce a well-distributed solutions with good scalability. In the above section we present our proposed BMOPSOCD approach to the problem of WSLA. For this approach, static and dynamic rounding methods with different threshold settings are considered.  In this section, a set of experiments have been conducted over three major features of the proposed algorithm. The first feature considers the static threshold. The influence of the selection of different values of static threshold are studied in the first experiment. The second feature is the dynamic rounding functions used in the algorithm. Three different types of rounding function are examined in the second experiment. The third feature is the adaptive threshold. Its performance is studied in the third experiment. An experiment of a combination of static rounding function is conducted and discussed. Lastly, we conduct an experiment considering the overall performance of a BMOPSOCD with a dynamic rounding function in comparison with three other algorithms: PSO, NSPSO and NSGA-II (please see \cite{tan2016evocop} for details).
+
+\subsection{Datasets}
+\label{sec:datasets}
+This project is based on both real world datasets \cite{6076756,5552800} and stimulated datasets \cite{tan2016evocop}. The dataset includes a network latency matrix between 339 user centers and 5825 candidate locations. In this project, there are mainly three attributes that need to be provided, network latencies between candidate locations and user centers,  server rental cost in candidate locations and web service invocation frequencies information. As mentioned in Section \ref{sec:prelimminary}, two other matrices, deployment cost matrix $C$ and invocation frequency matrix $F$, are needed as input information. In principle, development cost can be either fixed fees (monthly rent) or variable fees (e.g. depending on storage and other resource usage). For the sake of simplicity we consider fixed deployment fee. For each service, the deployment cost was randomly generated from a normal distribution with the mean of 100 and standard deviation of 20. For each user centre and each service, the invocation frequency was randomly generated from a uniform distribution between 1 and 120. To test scalability of our proposed approach we design a set of problems with different complexities.
+
+Table \ref{tab:problem} shows fourteen problems, listed with increasing size and difficulty, which are used as representative samples of the WSLA problem.
+
+\begin{table}[H]
+\footnotesize
+\centering
+\caption{Problem set}
+\label{tab:problem}
+\begin{tabular}{l|c|c|c}
+\hline
+Datasets   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No. of \\ Services\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No. of \\ Candidate Locations\end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}No. of \\ user centers\end{tabular}} \\ \hline
+Problem 1  & 20                                                                             & 5                                                                                         & 10                                                                                  \\ \hline
+Problem 2  & 20                                                                             & 10                                                                                        & 10                                                                                  \\ \hline
+Problem 3  & 50                                                                             & 15                                                                                        & 20                                                                                  \\ \hline
+Problem 4  & 50                                                                             & 15                                                                                        & 40                                                                                  \\ \hline
+Problem 5  & 50                                                                             & 25                                                                                        & 20                                                                                  \\ \hline
+Problem 6  & 50                                                                             & 25                                                                                        & 40                                                                                  \\ \hline
+Problem 7  & 100                                                                            & 15                                                                                        & 20                                                                                  \\ \hline
+Problem 8  & 100                                                                            & 15                                                                                        & 40                                                                                  \\ \hline
+Problem 9  & 100                                                                            & 25                                                                                        & 20                                                                                  \\ \hline
+Problem 10 & 100                                                                            & 25                                                                                        & 40                                                                                  \\ \hline
+Problem 11 & 200                                                                            & 25                                                                                        & 40                                                                                  \\ \hline
+Problem 12 & 200                                                                            & 25                                                                                        & 80                                                                                  \\ \hline
+Problem 13 & 200                                                                            & 40                                                                                        & 40                                                                                  \\ \hline
+Problem 14 & 200                                                                            & 40                                                                                        & 80                                                                                  \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+\subsection{Performance Metrics}
+
+We use hypervolume and IGD as the evaluation metrics. The IGD \cite{1501598} is a modified version of generational distance \cite{veldhuizen99, 870296} as a way of estimating how far the elements in the true Pareto front are from those in the Pareto front produced by our algorithm. It calculates the sum of the distances from each point of the true Pareto front to the nearest point of the non-dominated set that produced by an algorithm. The lower the IGD, the better quality the solution is. A true Pareto front is needed when calculating the IGD value. For our problem, the true Pareto front is unknown. Therefore, a approximated true Pareto front is produced by combining all the solutions produced by 4 algorithms (BMOPSOCD, NSGA-II, NSPSO, BPSO) and then applying a non-dominated sorting over it. The approximated true Pareto front dominates all the other solutions.
+
+\subsection{Parameter Settings}
+
+ 
+The parameters of the PSO algorithms are set as follow, $w$ = 0.4, mutation probability $P_m$ = 0.5, $c1$ = 1, $c2$ = 1, archive size is 250, population size is  50 and the max number of iteration is 50. For each experiment, the proposed algorithm has been independently run 40 times. The best results of all the runs are compared.  To obtain the \emph{best result} of 40 runs, the results of all 40 runs are combined and sorted by a fast non-dominated sorting.
+ 
+
+\subsection{Experiments on Rounding Functions}
+This section designs four experiments to study the effect of different types of rounding functions. Four datasets (Problems 2 $\sim$ 5) are used, chosen from Table \ref{tab:problem}.
+
+% The cost constraint is not considered in these experiments since it is not the study priority.
+% The repair function of NSGA-II will also only use the Web service number constraint.
+
+\subsubsection{Static Rounding Function}
+\label{sec:static_exp}
+There are two questions that we would like to answer with this experiment. The first question is what the influence of the threshold is. The second question is how to select a proper static threshold. In order to answer these two questions, a set of experiments is conducted using different static threshold values to evaluate the performance of the proposed algorithm. The threshold value is ranged from 0.3 to 0.7. 
+
+\subsubsection{Dynamic Rounding Function}
+In Section \ref{sec:dynamic}, three dynamic rounding functions are proposed. In this section we evaluate the performances of different rounding functions to find out which dynamic rounding function provides the best results.  The upper boundary of dynamic threshold $u$ = 0.7 and the lower boundary of dynamic threshold $l$ = 0.3. The results are compared using \emph{average solutions}.
+
+Figure \ref{fig:dynamic} shows threshold $t$ changes along with the generations. It is easy to notice that the points on linear and quadratic functions are uniformly distributed. Points on reciprocal are unevenly distributed.
+
+\subsubsection{An Adaptive Threshold Approach}
+The performance of the adaptive threshold approach is studied in this experiment. The upper boundary of dynamic threshold $u$ = 0.7 and the lower boundary of dynamic threshold $l$ = 0.3. The interval is set to 10. The results are compared with dynamic functions with \emph{average solution} approach.
+
+
+
+\subsubsection{Comparison between Dynamic Rounding Functions}
+\label{sec:expdy}
+Table \ref{tab:hyperDynamic} shows the average performance of three dynamic functions that evaluated by hypervolume.
+The results indicate the reciprocal function dominated the three dynamic functions in all test cases. This effect could be visually observed by plotting the median results (Figure \ref{fig:dynamicFunctions}).
+Figure \ref{fig:dynamicFunctions} shows the reciprocal function slightly dominate the other two dynamic functions. However, the problem of the reciprocal function is that the solutions are not complete. There are gaps in all problems. 
+The gap is created because of the uniformity of the reciprocal function (Figure \ref{fig:dynamic}).
+
+\begin{figure}[h!]
+   \centering
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/dynamic_problem_2.eps}
+	   \caption{}
+   \end{subfigure}
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/dynamic_problem_3.eps}
+	   \caption{}
+   \end{subfigure}
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/dynamic_problem_4.eps}
+	   \caption{}
+   \end{subfigure}
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/dynamic_problem_5.eps}
+	   \caption{}
+   \end{subfigure}
+   \caption{Dynamic Rounding Function Experiments : 
+      The non-dominated solutions from a single run which produced the median IGD value over 40 runs}
+   \label{fig:dynamicFunctions}
+\end{figure}
+
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{The mean and standard deviation of the hypervolume values over the 40 independent runs}
+\label{tab:hyperDynamic}
+\begin{tabular}{l|c|c|c}
+\hline
+          & \multicolumn{1}{l|}{Linear} & \multicolumn{1}{l|}{Quadratic} & \multicolumn{1}{l}{Reciprocal}  \\ \hline
+problem 2 & 0.72 $\pm$ 0.011            & 0.73 $\pm$ 0.008               & \textbf{0.74 $\pm$ 0.013}  	 \\
+problem 3 & 0.80 $\pm$ 0.012            & 0.81 $\pm$ 0.012               & \textbf{0.815 $\pm$ 0.013}  		\\
+problem 4 & 0.82 $\pm$ 0.012            & 0.86 $\pm$ 0.016               & \textbf{0.87 $\pm$ 0.014}  	\\
+problem 5 & 0.80 $\pm$ 0.014            & 0.85 $\pm$ 0.023               & \textbf{0.86 $\pm$ 0.020}  	\\ \hline
+\end{tabular}
+\end{table}
+
+According to Table \ref{tab:hyperDynamic}, the experimental results show that in terms of convergence, the reciprocal function produces the best result.
+However, it also shows the major disadvantage of the reciprocal function, which can not produce an entire Pareto front. In contrast, the quadratic function performs
+a little worse in convergence but obtains an uniformly distributed non-dominated set. The linear function is dominated by quadratic function in both aspects.
+
+The better convergence with the reciprocal function can be explained, as there is minor change in threshold in the most generations, the swarm has longer time to search along the same direction. On the other hand, with the linear and quadratic function, the constant changing in direction could leads to premature convergence.
+
+In comparison between the quadratic function and the linear function, the only difference is that changing in the quadratic function is smoother than linear.
+The searching process is in a continuous space, therefore, sudden changes are considered to be harmful.
+
+With these experiment results, it is still not easy to answer \emph{Which dynamic rounding function produces the best results}. In the perspective of
+algorithm design, convergence and diversity are both important. The little advantage of convergence in the reciprocal function might be considered as trivial, but the
+gap in the non-dominated set could not be neglected. Therefore, the quadratic function is a better choice. On the other hand, from the perspective of WSLA, the gap might be trivial since it can be complemented by the nearby solutions. However, better convergence means high quality allocation plan which is the major goal of WSLA.
+
+
+\subsubsection{Results for the Adaptive Threshold Approach}
+We compared the performance of the adaptive threshold approach with reciprocal rounding function.
+Table \ref{tab:transfercomp} clearly shows reciprocal function dominates the adaptive threshold approach in the most cases.
+However, Figure \ref{fig:transfer} shows the adaptive threshold approach dominates in Problem 3 and has better diversity in Problem 4.
+The results show another desired feature of the adaptive threshold approach. It could provide an uniformly distributed non-dominated set.
+Overall, the performance of the adaptive threshold approach is very close to reciprocal function.
+
+\begin{table}[]
+\centering
+\footnotesize
+\caption{A comparison between Reciprocal function and Adaptive function, the mean and standard deviation of hypervolume values over the 40 independent runs}
+\label{tab:transfercomp}
+\begin{tabular}{l|c|c}
+\hline
+                                                                                                            & Reciprocal                                                                                                                                     & Adaptive                                                                                                                     \\ \hline
+\multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}problem 2\\ problem 3\\ problem 4\\ problem 5\end{tabular}} & \begin{tabular}[c]{@{}c@{}}\textbf{0.74 $\pm$ 0.013} \\ 0.815 $\pm$ 0.013\\ \textbf{0.87 $\pm$ 0.014} \\ \textbf{0.86 $\pm$ 0.020}  \end{tabular} & \begin{tabular}[c]{@{}c@{}}0.72 $\pm$ 0.011\\  \textbf{0.83 $\pm$ 0.014} \\ 0.85 $\pm$ 0.014\\ 0.85 $\pm$ 0.022\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[h!]
+   \centering
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/transfer_problem2.eps}
+	   \caption{}
+   \end{subfigure}
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/transfer_problem3.eps}
+	   \caption{}
+   \end{subfigure}
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/transfer_problem4.eps}
+	   \caption{}
+   \end{subfigure}
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/transfer_problem5.eps}
+	   \caption{}
+   \end{subfigure}
+   \caption{Adaptive Rounding Function Experiments: The non-dominated solutions among the sets obtained by 40 independent runs of adaptive function and reciprocal
+   function}
+   \label{fig:transfer}
+\end{figure}
+
+
+\subsubsection{A Combination of Static Function}
+In this experiment, we combined all solutions from 5 static rounding functions mentioned in Section \ref{sec:static_exp} and applied
+a fast non-dominated sorting over it. The performance is compared with reciprocal rounding function in Figure \ref{fig:combination}.
+As the figure shows, the combined non-dominated set dominates all problems. The solution is not only diverse but also uniformly distributed.
+However, the major problem is that this method takes five times longer execution time than using reciprocal function.
+
+\begin{figure}[h!]
+   \centering
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/combination_problem2.eps}
+	   \caption{}
+   \end{subfigure}
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/combination_problem3.eps}
+	   \caption{}
+   \end{subfigure}
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/combination_problem4.eps}
+	   \caption{}
+   \end{subfigure}
+   \begin{subfigure}{0.49\linewidth}
+       \includegraphics[width=\textwidth]{pics/combination_problem5.eps}
+	   \caption{}
+   \end{subfigure}
+   \caption{Combination of Static Function Experiments:  The non-dominated solutions among
+the sets obtained by 40 independent runs of combination of static thresholds and reciprocal
+function}
+   \label{fig:combination}
+\end{figure}
+
+
+\subsection{BMOPSOCD versus NSPSO, NSGA-II and BPSO}
+
+To evaluate the performance of our proposed BMOPSOCD with dynamic functions, we conduct experiments to compare its performance with three previous approaches, NSPSO, BPSO and NSGA-II. The results are shown in Table \ref{tab:results}. In this table, ``Ave-'', ``Std-'' illustrate the average and standard deviation of four approaches over the 40 independent runs. It can be seen from Table \ref{tab:results}, on all datasets except one, BMOPSOCD dominates other algorithms in both hypervolume and IGD. The only exception is Problem 1, where BPSO has the best hypervolume value. On all datasets, only BMOPSOCD remains a good performance on hypervolume while the performance of the other three approaches is obviously decreasing with the number of variable increasing. On all datasets, BMOPSOCD achieved a considerably better performance than other three algorithms do in IGD which indicates a high coverage.
+
+In comparison with NSPSO and NSGA-II, BMOPSOCD with dynamic rounding function achieved significantly better convergence and diversity. The first reason is that with the dynamic
+rounding function, BMOPSOCD could move out of local optima. In contrast, NSGA-II and NSPSO are easy to stuck at local optima. The second reason is BMOPSOCD
+keeps an external archive. Although the three algorithms maintain the same size of population, they produce different sizes of solutions. BMOPSOCD outputs an archive with a size of 250 while other two algorithms output a population of size 50.
+
+In Problem 1, the convergence of BMOPSOCD is worse than BPSO. One reason is probably that BPSO runs 50 generations with the same weight for both objectives, it has more time to search a direction. On the other hand, with dynamic rounding function, MOSPCOD might not completely converge. Another reason is related to the variable size, where BPSO has better performance in small datasets, when the number of datasets increases, the performance drops rapidly. In contrast, BMOPSOCD with the dynamic rounding function is not affected by the variable sizes.
+
+\begin{table*}[!htb]
+\centering
+\footnotesize
+\caption{Comparison between BMOPSOCD, NSPSO, NSGA-II and BPSO: The non-dominated solutions among the sets obtained by 40 independent runs of different algorithms}
+\label{tab:results}
+
+\begin{tabular}{|c|l|c|c|}
+\hline
+Dataset                         & \multicolumn{1}{c|}{Method}                                              & Hypervolume (avg $\pm$ sd)                                                                                                     & \multicolumn{1}{l|}{IGD (avg $\pm$ sd)}                                                                                                    \\ \hline
+problem 1                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}0.83 $\pm$ 0.04\\ 0.76 $\pm$ 0.018\\ 0.83 $\pm$ 0.013\\ \textbf{0.89 $\pm$ 0.015} \end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{3.73E-02 $\pm$ 1.03E-02} \\ 0.16 $\pm$ 3.45E-02\\  0.19 $\pm$ 3.21E-02\\ 0.46 $\pm$ 2.45E-02\end{tabular} \\ \hline
+problem 2                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.73 $\pm$ 0.011} \\ 0.61 $\pm$ 0.001\\ 0.60 $\pm$ 0.011\\  0.61 $\pm$ 0.001\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{3.15E-02 $\pm$ 7.92E-03} \\ 0.15 $\pm$ 1.46E-02\\ 0.19 $\pm$ 1.81E-02\\  0.42 $\pm$ 1.54E-02\end{tabular} \\ \hline
+problem 3                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.81 $\pm$ 0.012} \\ 0.61 $\pm$ 0.011\\ 0.59 $\pm$ 0.008\\ 0.69 $\pm$ 0.007\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{7.03E-03 $\pm$ 1.92E-03} \\ 0.10 $\pm$ 6.35E-03\\ 0.16 $\pm$ 7.25E-03\\  0.30 $\pm$ 8.94E-03\end{tabular} \\ \hline
+problem 4                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.83 $\pm$ 0.016} \\ 0.63 $\pm$ 0.012\\ 0.61 $\pm$ 0.008\\ 0.71 $\pm$ 0.008\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{5.80E-03 $\pm$ 1.37E-03} \\ 0.11 $\pm$ 8.55E-03\\ 0.17 $\pm$ 9.11E-03 \\ 0.30 $\pm$ 8.62E-03\end{tabular} \\ \hline
+problem 5                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.84 $\pm$ 0.014} \\ 0.61 $\pm$ 0.009\\ 0.58 $\pm$ 0.005\\ 0.67 $\pm$ 0.007\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{3.74E-03 $\pm$ 1.02E-03} \\ 0.11 $\pm$ 7.93E-03\\ 0.17 $\pm$ 6.89E-03\\  0.24 $\pm$ 5.02E-03\end{tabular} \\ \hline
+\multicolumn{1}{|l|}{problem 6} & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.81 $\pm$ 0.014} \\ 0.59 $\pm$ 0.007\\ 0.55 $\pm$ 0.006\\ 0.63 $\pm$ 0.005\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{5.81E-03 $\pm$ 1.95E-03} \\ 0.11 $\pm$ 5.06E-03\\ 0.18 $\pm$ 8.01E-03 \\ 0.28 $\pm$ 5.88E-03\end{tabular} \\ \hline
+problem 7                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.79 $\pm$ 0.015} \\ 0.60 $\pm$ 0.008\\ 0.56 $\pm$ 0.005\\ 0.63 $\pm$ 0.006\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{7.13E-03 $\pm$ 1.70E-03} \\ 0.10 $\pm$ 4.58E-03\\ 0.17 $\pm$ 6.48E-03 \\ 0.27 $\pm$ 7.92E-03\end{tabular} \\ \hline
+problem 8                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.81 $\pm$ 0.015} \\ 0.61 $\pm$ 0.008\\ 0.58 $\pm$ 0.005\\ 0.65 $\pm$ 0.007\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{8.77E-03 $\pm$ 1.90E-03} \\ 0.12 $\pm$ 5.81E-03\\ 0.19 $\pm$ 6.17E-03 \\ 0.27 $\pm$ 5.86E-03\end{tabular} \\ \hline
+problem 9                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.83 $\pm$ 0.016} \\ 0.60 $\pm$ 0.009\\ 0.56 $\pm$ 0.004\\ 0.62 $\pm$ 0.005\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{3.58E-03 $\pm$ 1.53E-03} \\ 0.11 $\pm$ 5.33E-03\\ 0.17 $\pm$ 3.56E-03 \\ 0.22 $\pm$ 3.22E-03\end{tabular} \\ \hline
+problem 10                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.80 $\pm$ 0.012} \\ 0.58 $\pm$ 0.008\\ 0.53 $\pm$ 0.005\\ 0.58 $\pm$ 0.005\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{4.30E-03 $\pm$ 1.75E-03} \\ 0.11 $\pm$ 4.97E-03\\ 0.19 $\pm$ 5.62E-03 \\ 0.25 $\pm$ 3.91E-03\end{tabular} \\ \hline
+problem 11                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.79 $\pm$ 0.012} \\ 0.57 $\pm$ 0.009\\ 0.52 $\pm$ 0.003\\ 0.55 $\pm$ 0.003\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{5.19E-03 $\pm$ 1.81E-03} \\ 0.12 $\pm$ 4.22E-03\\ 0.20 $\pm$ 2.74E-03 \\ 0.24 $\pm$ 3.36E-03\end{tabular} \\ \hline
+problem 12                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.80 $\pm$ 0.01} \\ 0.58 $\pm$ 0.009\\ 0.52 $\pm$ 0.003\\ 0.56 $\pm$ 0.003\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{3.12E-03 $\pm$ 6.71E-04} \\ 0.12 $\pm$ 4.15E-03\\ 0.20 $\pm$ 3.08E-03 \\ 0.24 $\pm$ 2.50E-03\end{tabular} \\ \hline
+problem 13                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.83 $\pm$ 0.012} \\ 0.59 $\pm$ 0.008\\ 0.53 $\pm$ 0.003\\ 0.56 $\pm$ 0.004\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{2.63E-03 $\pm$ 6.73E-04} \\ 0.12 $\pm$ 3.46E-03\\ 0.20 $\pm$ 3.04E-03 \\ 0.22 $\pm$ 2.01E-03\end{tabular} \\ \hline
+problem 14                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ NSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.84 $\pm$ 0.015} \\ 0.59 $\pm$ 0.009\\ 0.53 $\pm$ 0.002\\ 0.57 $\pm$ 0.003\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{3.66E-03 $\pm$ 1.75E-03} \\ 0.13 $\pm$ 3.85E-03\\ 0.22 $\pm$ 3.24E-03 \\ 0.25 $\pm$ 1.83E-03\end{tabular} \\ \hline
+\end{tabular}
+
+\end{table*}
+
+In terms of execution time, BMOPSOCD is much better than other PSO variations. It achieves the best or the second best performance for 11 out of 14
+problems (Table \ref{tab:time}).
+
+
+\begin{table*}[th]
+\centering
+\footnotesize
+\caption{Execution time}
+\label{tab:time}
+\scalebox{0.9}{
+
+\begin{subtable}{.43\textwidth}
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+           & method                                                                   & time (avg $\pm$ sd)                                                                                                                           \\ \hline
+problem 1  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}17.99 $\pm$ 0.26 \\ \textbf{12.98 $\pm$ 0.18}\\ 19.00 $\pm$ 0.17 \\ 15.35 $\pm$ 0.15\end{tabular}                    \\ \hline
+problem 2  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}23.55 $\pm$ 0.27 \\ 16.18 $\pm$ 0.26\\ 25.52 $\pm$ 0.27 \\ \textbf{15.38 $\pm$ 0.31}\end{tabular}                    \\ \hline
+problem 3  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}103.65 $\pm$ 1.87 \\ 94.98 $\pm$ 7.28 \\ 111.86 $\pm$ 1.11 \\ \textbf{74.34 $\pm$ 0.61}\end{tabular}                 \\ \hline
+problem 4  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}181.20 $\pm$ 4.40 \\ 175.99 $\pm$ 9.67 \\ 182.09 $\pm$ 1.86 \\ \textbf{147.98 $\pm$ 1.30}\end{tabular}               \\ \hline
+problem 5  & \begin{tabular}[c]{@{}c@{}}BPSO\\ MOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}137.03 $\pm$ 0.87 \\ 89.74 $\pm$ 8.53 \\ 161.31 $\pm$ 0.95 \\ \textbf{84.17 $\pm$ 1.03}\end{tabular}                 \\ \hline
+problem 6  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}208.63 $\pm$ 2.23 \\ 172.80 $\pm$ 7.68 \\ 236.23 $\pm$ 2.72 \\ \textbf{157.52$\pm$ 1.62}\end{tabular}                \\ \hline
+problem 7  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}234.73 $\pm$ 6.42 \\ 202.68 $\pm$ 10.46 \\ 242.94 $\pm$ 9.00 \\ \textbf{159.26 $\pm$ 1.31}\end{tabular}              \\ \hline
+\end{tabular}
+\end{subtable}
+
+\begin{subtable}{.43\linewidth}
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+           & method                                                                   & time (avg $\pm$ sd)                                                                                                                           \\ \hline
+problem 8  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}476.76 $\pm$ 22.40 \\ 531.64 $\pm$ 43.14 \\ 444.41 $\pm$ 22.86 \\ \textbf{375.05 $\pm$ 4.11}\end{tabular}            \\ \hline
+problem 9  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}293.43 $\pm$ 3.01 \\ 198.81 $\pm$ 7.11 \\ 334.62 $\pm$ 2.81 \\ \textbf{181.30 $\pm$ 1.99}\end{tabular}               \\ \hline
+problem 10 & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}507.72 $\pm$ 4.19 \\ 449.91 $\pm$ 26.00 \\ 539.51 $\pm$ 4.06 \\ \textbf{381.18 $\pm$ 3.06}\end{tabular}              \\ \hline
+problem 11 & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}1,237.30 $\pm$ 42.06 \\ 1,262.79 $\pm$ 91.65\\ 1,328.17 $\pm$ 12.67 \\ \textbf{1,036.53 $\pm$ 35.38}\end{tabular}    \\ \hline
+problem 12 & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}3,631.14 $\pm$ 17.70 \\ 4,326.22 $\pm$ 478.14 \\ 3,395.47 $\pm$ 100.51 \\ \textbf{3,326.94 $\pm$ 38.21}\end{tabular} \\ \hline
+problem 13 & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}1,416.63 $\pm$ 0.26 \\ 1,155.21 $\pm$ 28.85 \\ 1,507.92 $\pm$ 25.74 \\ \textbf{1,098.08 $\pm$ 17.36}\end{tabular}    \\ \hline
+problem 14 & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ NSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}3,617.53 $\pm$ 34.13 \\ \textbf{3,284.66 $\pm$ 124.13} \\ 3,759.51$\pm$ 61.49 \\ 3,372.53 $\pm$ 31.05 \end{tabular}   \\ \hline
+\end{tabular}
+\end{subtable}
+}
+\end{table*}
+
+
+
+
+
+\begin{figure*}[ht]
+   \caption{MOPSOCD, NSPSO and BPSO Experiments: The non-dominated solutions
+among the sets obtained by 40 independent runs of different algorithms}
+   \centering
+   \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total1.eps}
+	   \caption{Problem 1}
+   \end{subfigure}
+   \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total2.eps}
+	   \caption{Problem 2}
+   \end{subfigure}
+   \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total3.eps}
+	   \caption{Problem 3}
+   \end{subfigure}
+      \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total4.eps}
+	   \caption{Problem 4}
+   \end{subfigure}
+      \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total5.eps}
+	   \caption{Problem 5}
+   \end{subfigure}
+   \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total6.eps}
+	   \caption{Problem 6}
+   \end{subfigure}
+   \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total7.eps}
+	   \caption{Problem 7}
+   \end{subfigure}
+      \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total8.eps}
+	   \caption{Problem 8}
+   \end{subfigure}
+      \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total9.eps}
+	   \caption{Problem 9}
+   \end{subfigure}
+   \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total10.eps}
+	   \caption{Problem 10}
+   \end{subfigure}
+   \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total11.eps}
+	   \caption{Problem 11}
+   \end{subfigure}
+   \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total12.eps}
+	   \caption{Problem 12}
+   \end{subfigure}
+      \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total13.eps}
+	   \caption{Problem 13}
+   \end{subfigure}
+      \begin{subfigure}{0.25\linewidth}
+       \includegraphics[width=\textwidth]{pics/total14.eps}
+	   \caption{Problem 14}
+   \end{subfigure}
+   \label{fig:total}
+\end{figure*}
+
+In summary, from the experimental evaluation that comparing the proposed algorithm with previous approaches, we observe that on most datasets, BMOPSOCD can achieve much better results in both convergence and diversity than other three methods, NSPSO, NSGA-II and BPSO. Additionally, the performance of MOPSOCD with dynamic rounding function is not affected by the size of variable. This is a significant advantage of BMOPSOCD over the other three approaches.
+
+\section{Conclusion and Future Work} \label{sec:conclution}
+
+This paper proposed a BMOPSOCD to solve the WSLA problem with the aim of producing a set of high quality solutions with good diversity that covers most of the Pareto front when dealing with large datasets. For that, we proposed a binary version of multi-objective PSO with crowding distance to solve the WSLA problem. We introduce a rounding function mechanism which not only makes a continuous algorithm compatible with binary problems but also significantly improved the quality of solutions. Specifically, three types of rounding functions and an adaptive rounding function were developed. From the experiments, we observed that the solutions from BMOPSOCD with dynamic rounding functions have a great diversity that almost covers the whole Pareto front. Meanwhile, BMOPSOCD could produce good solutions regardless of increasing problem size.
+
+%The major contribution is that, we provide a rounding function and an adaptive threshold technique to make a continuous algorithm compatible with a binary problem. These techniques can also be applied in other continuous algorithms. We have shown that BMOPSOCD can produce solutions with a good diversity that covers most of the Pareto front.
+
+There are a few directions that future work can work on. Firstly, our model can be further improved by considering service composition. For now, the problem model considers each service as an atomic service. With the increasing usages of composite services that composed with atomic services distributed over the internet, we need to consider service composition workflow while doing WSLA.   Service composition workflow has a significant impact on the allocation of atomic service because the data flow between services could not be neglected. Therefore, the location of each atomic service is highly related to the previous and the next service in a workflow.
+
+Secondly, more potential objectives need to be considered, for example, the availability problem. In order to avoid single point failure, WSPs normally deploy multiple services in different candidate locations to keep the availability. Green economy could also being considered. As the issue of global warming becomes a world-wide challenge, deploying a service to a location that close to a power plant has been proposed in the literature \cite{Schien}. In addition, future work can consider multiple constraints such as the overall cost constraints and bandwidth constraints.
+
+%\ifCLASSOPTIONcaptionsoff
+ %\newpage
+%\fi
+
+\bibliographystyle{IEEEtran}
+
+\bibliography{sample}
+
+\end{document}
+
+
+
+
+
+
+% The rounding process can be done in fitness function so that there is no need to modify the PSO.
+
+% We introduced a \emph{service location-allocation probability matrix}, $A' = [a'_{sj}]$ represents the probability of a
+% service $s_{i}$ allocate to a candidate location $j_{i}$.
+% $a'_{sj}$ is a real value, $a'_{sj} \in (0, 1)$ indicate the probability of a service is \textbf{NOT}
+% allocate to a candidate location.
+%
+% We use the service location-allocation probability matrix $A'$ = $[a'_{sj}]$ as a particle.
+% During the PSO process, the particle needs to be transfered to binary representation in order to compatible with
+% the modeling. In order to transfer $A' \rightarrow A$, we introduced a transformation
+% function.
+%
+
+
+
+
+
+
+
