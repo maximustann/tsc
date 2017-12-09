@@ -614,7 +614,8 @@ All fitness values are normalized between 0 and 1 with linear normalization meth
 The normalization method requires the maximum and minimum values of cost and response time 
 that we found during optimization. 
 
-We can obtained these extreme values with the following method. We collect the solutions from all four algorithms :NSGA-II, BPSO, NSPSO, and BMOPSOCD on the same test instances. Then, we applied non-dominated sorting on these solutions to obtain the best solutions. The third step, we can find the extreme values of cost and response time from the best solutions. 
+We obtained these extreme values as follows. For each instance, we collected the solutions from all the four compared algorithms:NSGA-II, BPSO, NSPSO, and BMOPSOCD. Then, we applied non-dominated sorting on these solutions to obtain the non-dominated solutions. Finally, we can find the extreme values of cost and response time from the non-dominated solutions among all the solutions found by all the compared algorithms.
+
 \subsection{Test instances}
 \label{sec:datasets}
 
@@ -623,15 +624,12 @@ We can obtained these extreme values with the following method. We collect the s
 
 
 
-We design 14 test instances in terms of increasing size of search space
-(see Table \ref{test_instances}). The instances were generated randomly, and thus were
-not biased to any algorithm. The search space is decided by the number of services and candidate locations (e.g $2^{service \cdot candidate}$). Because the
-computation complexity is not solely determined by the search space of test instances, from instance 3 onwards, for each search space, we vary
-the number of user centers. The purpose is to test which factor (Number of services, candidate locations, and user centers) contributes to the
-computation complexity the most.
+We designed 14 test instances with increasing size of search space (see Table \ref{test_instances}). The instances were generated randomly, and thus were not biased to any algorithm. The search space is decided by the number of services and candidate locations (e.g $2^{service \cdot candidate}$). Because the computation complexity is not solely determined by the search space of test instances, from instance 3 onwards, for each search space, we vary the number of user centers. 
 
-We construct test instances based on real-world WS-Dream dataset \cite{Service_dataset}. The data
-contains only the latencies between candidate locations and user centers, but lacks the deployment costs for candidate locations and invocation frequencies for web services. Therefore, to generate a complete WSLAP instance, we randomly generated the deployment costs for candidate locations according to a normal distribution with the mean of 100 and standard deviation of 20. We generate the invocation frequency from a uniform distribution between 1 and 120. 
+
+
+We constructed test instances based on real-world WS-Dream dataset \cite{Service_dataset}. The data
+contains only the latencies between candidate locations and user centers, but lacks the deployment costs for candidate locations and invocation frequencies for web services. Therefore, to generate a complete WSLAP instance, we randomly generated the deployment costs for candidate locations according to a normal distribution with the mean of 100 and standard deviation of 20. We generated the invocation frequency from a uniform distribution between 1 and 120. 
 
 % The \textit{WS-Dream} dataset includes a network latency matrix between 339 user centers and 5825 candidate locations. In this project, there are mainly three matrices to be provided: network latencies between candidate locations and user centers, deployment cost in candidate locations, and web service invocation frequency. In principle, deployment cost can be either fixed fees (monthly rent) or variable fees (e.g. depending on storage and other resource usages). For the sake of simplicity, we consider fixed deployment fee.
 
@@ -676,8 +674,8 @@ We use HyperVolume (HV) and IGD as the evaluation metrics. HyperVolume indicator
 The parameters of the PSO algorithms are set as follows. We apply static inertia weight and set $w$ to 0.4. Although it is found in \cite{xin2009particle} that inertia weight $w$ decreasing from 0.9 to 0.4 provides excellent results, this work only focuses on rounding functions. Therefore, the influence of dynamic $w$ has to be eliminated. Mutation probability is in range of [0, 1]. This study follows the original paper's \cite{Raquel} and set $P_m$ to 0.5. The cognitive parameter and social parameter $c_1$ and $c_2$ are generally selected from the range of [0, 4]. This study sets both parameters to 1 \cite{Raquel} so that cognitive and social parameter have an equal influence on the swarm. The archive size and a population size are set to 250 and 50 respectively according to the original paper's \cite{Raquel} recommendation. Generally, the population size has a relation with the search space. A larger population size denotes a stronger search ability because 
 more space are explored \cite{qi1994theoretical}.
 Our study focuses on the binary PSO technique instead of selecting the best parameter set. Therefore an empirical value is selected and the maximal number of iteration is set to 50 in all experiments. 
-The ``empirical value'' means we try several values for the number of generation and see whether the solutions has converged (has little changes of fitness values between two consecutive generations). 
-Since the computation is time consuming, we choose a small number of generation for all algorithms for fair comparison.
+The ``empirical value'' means we tried several values for the number of generation and see whether the solutions has converged (has little changes of fitness values between two consecutive generations). 
+We chose the minimum number of generation that allows all the four compared algorithms converging. Hence, it is fair for all compared algorithms
 
 
 We use (1, 1) as the reference point in Hypervolume. Because we normalize two objectives between 0 and 1, reference point (1, 1) is the extreme point of objective values. Moreover, we do not have particular preference to objectives. Therefore, a balanced point (1, 1) is suitable for the reference point.
@@ -707,7 +705,7 @@ $c_2$      & 1 \cite{Raquel}    & HV reference point & (1, 1) \\ \bottomrule
 % \usepackage{booktabs}
 
 \subsection{Experiments on Rounding Functions}\label{sec:expRound}
-This section designs four experiments to study the effect of different types of rounding functions. We applied Wilcoxon signed rank test on all results between variants of BMOPSOCD. We show four test instances (Instances 2 $\sim$ 5) because we observe a similar pattern throughout all test instances. Therefore, we choose these four representative instances to show the results.
+This section designs four experiments to study the effect of different types of rounding functions. We applied Wilcoxon signed rank test on all results between variants of BMOPSOCD. We choose these four representative instances (Instances 2 to 5) to show the results. The other test instances showed similar patterns.
 
 % The cost constraint is not considered in these experiments since it is not the study priority.
 % The repair function of NSGA-II will also only use the Web service number constraint.
