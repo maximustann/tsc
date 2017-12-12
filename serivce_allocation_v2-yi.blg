@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2017)
+This is BibTeX, Version 0.99d (TeX Live 2017/MacPorts 2017_2)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: serivce_allocation_v2-yi.aux
 The style file: IEEEtran.bst
@@ -8,56 +8,74 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: sample.bib
-Repeated entry---line 1411 of file sample.bib
+Repeated entry---line 1337 of file sample.bib
  : @inproceedings{5961695
  :                       ,
 I'm skipping whatever remains of this entry
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty booktitle in Dan:2008
+Warning--empty booktitle in 916684
+Warning--empty booktitle in Multiobjective
 Warning--missing publisher in Tan2016a
 Warning--missing publisher in Tan2016
+Warning--empty booktitle in Raquel
+Warning--empty booktitle in 7360024
+Warning--empty booktitle in kim2004spea2
+Warning--empty booktitle in kennedy2011particle
+Warning--empty booktitle in Kennedy:1997hd
+Warning--empty booktitle in NSPSO
+Warning--empty booktitle in Micro
+Warning--empty booktitle in khanesar2007novel
+Warning--empty booktitle in 1004478
+Warning--empty booktitle in Service_dataset
+Warning--empty booktitle in 1501598
+Warning--empty booktitle in xin2009particle
+Warning--empty booktitle in 5961695
+Warning--empty booktitle in 6557869
+Warning--empty booktitle in Phan8
 
 Done.
 You've used 45 entries,
             4087 wiz_defined-function locations,
-            1120 strings with 16887 characters,
-and the built_in function-call counts, 37661 in all, are:
-= -- 3112
-> -- 797
-< -- 372
-+ -- 447
+            1094 strings with 15337 characters,
+and the built_in function-call counts, 36943 in all, are:
+= -- 2992
+> -- 803
+< -- 378
++ -- 451
 - -- 121
-* -- 1820
-:= -- 5521
+* -- 1758
+:= -- 5339
 add.period$ -- 98
 call.type$ -- 45
 change.case$ -- 40
-chr.to.int$ -- 834
-cite$ -- 47
-duplicate$ -- 2637
-empty$ -- 3019
+chr.to.int$ -- 852
+cite$ -- 65
+duplicate$ -- 2581
+empty$ -- 2952
 format.name$ -- 155
-if$ -- 8859
+if$ -- 8677
 int.to.chr$ -- 0
 int.to.str$ -- 45
-missing$ -- 441
+missing$ -- 422
 newline$ -- 160
 num.names$ -- 44
-pop$ -- 937
+pop$ -- 972
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 2972
+skip$ -- 2892
 stack$ -- 0
-substring$ -- 1996
-swap$ -- 2272
+substring$ -- 2034
+swap$ -- 2199
 text.length$ -- 94
 text.prefix$ -- 0
 top$ -- 5
 type$ -- 45
-warning$ -- 2
-while$ -- 195
+warning$ -- 20
+while$ -- 198
 width$ -- 47
-write$ -- 479
+write$ -- 456
 (There was 1 error message)

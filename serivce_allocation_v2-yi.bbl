@@ -22,10 +22,8 @@
 \BIBdecl
 
 \bibitem{Dan:2008}
-A.~Dan, R.~D. Johnson, and T.~Carrato, ``{SOA service reuse by design},'' in
-  \emph{SDSOA 2008 - 2nd international workshop on Systems development in SOA
-  environments (@ICSE)}, ser. SDSOA '08, no. August.\hskip 1em plus 0.5em minus
-  0.4em\relax ACM, 2008, p.~25.
+A.~Dan, R.~D. Johnson, and T.~Carrato, ``{SOA service reuse by design},'' no.
+  August.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2008, p.~25.
 
 \bibitem{Ran}
 S.~Ran, ``{A model for web services discovery with QoS},'' \emph{ACM SIGecom
@@ -37,13 +35,11 @@ D.~A. Menasc{\'{e}}, ``{QoS issues in web services},'' \emph{IEEE Internet
 
 \bibitem{916684}
 E.~Cronin, S.~Jamin, C.~Jin, A.~R. Kurc, D.~Raz, and Y.~Shavitt, ``{Constrained
-  mirror placement on the Internet},'' in \emph{IEEE Journal on Selected Areas
-  in Communications}, vol.~20, no.~7, 2002, pp. 1369--1382.
+  mirror placement on the Internet},'' vol.~20, no.~7, 2002, pp. 1369--1382.
 
 \bibitem{Multiobjective}
-K.~Deb and K.~Deb, ``{Multi-objective Optimization},'' in \emph{Search
-  Methodologies}.\hskip 1em plus 0.5em minus 0.4em\relax Springer London, 2014,
-  pp. 403--449.
+K.~Deb and K.~Deb, ``{Multi-objective Optimization}.''\hskip 1em plus 0.5em
+  minus 0.4em\relax Springer London, 2014, pp. 403--449.
 
 \bibitem{7108071}
 J.~Liu, M.~Tang, Z.~Zheng, X.~F. Liu, and S.~Lyu, ``{Location-Aware and
@@ -100,9 +96,8 @@ M.~R. Senouci, D.~Bouguettouche, F.~Souilah, and A.~Mellouk, ``{Static wireless
 
 \bibitem{Raquel}
 C.~R. Raquel and P.~C. Naval, ``{An effective use of crowding distance in
-  multiobjective particle swarm optimization},'' in \emph{Proceedings of the
-  2005 conference on Genetic and evolutionary computation - GECCO '05}, ser.
-  GECCO '05.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2005, p. 257.
+  multiobjective particle swarm optimization}.''\hskip 1em plus 0.5em minus
+  0.4em\relax ACM, 2005, p. 257.
 
 \bibitem{Okabe:je}
 \emph{{A Critical Survey of Performance Indices for Multi-Objective
@@ -111,8 +106,7 @@ C.~R. Raquel and P.~C. Naval, ``{An effective use of crowding distance in
 \bibitem{7360024}
 \BIBentryALTinterwordspacing
 N.~Riquelme, C.~{Von Lucken}, and B.~Baran, ``{Performance metrics in
-  multi-objective optimization},'' in \emph{2015 Latin American Computing
-  Conference (CLEI)}, oct 2015, pp. 1--11. [Online]. Available:
+  multi-objective optimization},'' oct 2015, pp. 1--11. [Online]. Available:
   \url{http://ieeexplore.ieee.org/document/7360024/}
 \BIBentrySTDinterwordspacing
 
@@ -123,9 +117,9 @@ K.~Deb, A.~Pratap, S.~Agarwal, and T.~Meyarivan, ``{A fast and elitist
 
 \bibitem{kim2004spea2}
 M.~Kim, T.~Hiroyasu, M.~Miki, and S.~Watanabe, ``{SPEA2+: Improving the
-  Performance of the Strength Pareto Evolutionary Algorithm 2},'' in
-  \emph{Sort}, vol. 3242/2004.\hskip 1em plus 0.5em minus 0.4em\relax Springer,
-  2004, pp. 742--751.
+  Performance of the Strength Pareto Evolutionary Algorithm 2},'' vol.
+  3242/2004.\hskip 1em plus 0.5em minus 0.4em\relax Springer, 2004, pp.
+  742--751.
 
 \bibitem{zhang2007moea}
 Q.~Zhang and H.~Li, ``{MOEA/D: A Multiobjective Evolutionary Algorithm Based on
@@ -133,15 +127,13 @@ Q.~Zhang and H.~Li, ``{MOEA/D: A Multiobjective Evolutionary Algorithm Based on
   vol.~11, no.~6, pp. 712--731, 2007.
 
 \bibitem{kennedy2011particle}
-M.~Clerc, ``{Particle Swarm Optimization},'' in \emph{Encyclopedia of machine
-  learning}.\hskip 1em plus 0.5em minus 0.4em\relax Springer, 2006, pp.
-  760--766.
+M.~Clerc, ``{Particle Swarm Optimization}.''\hskip 1em plus 0.5em minus
+  0.4em\relax Springer, 2006, pp. 760--766.
 
 \bibitem{Kennedy:1997hd}
 J.~Kennedy and R.~Eberhart, ``{A discrete binary version of the particle swarm
-  algorithm},'' in \emph{1997 IEEE International Conference on Systems, Man,
-  and Cybernetics. Computational Cybernetics and Simulation}, vol.~5.\hskip 1em
-  plus 0.5em minus 0.4em\relax IEEE, 1997, pp. 4--8.
+  algorithm},'' vol.~5.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 1997, pp.
+  4--8.
 
 \bibitem{1304847}
 C.~A. {Coello Coello}, G.~T. Pulido, and M.~S. Lechuga, ``{Handling multiple
@@ -150,15 +142,13 @@ C.~A. {Coello Coello}, G.~T. Pulido, and M.~S. Lechuga, ``{Handling multiple
 
 \bibitem{NSPSO}
 X.~Li, ``{A Non-dominated Sorting Particle Swarm Optimizer for Multiobjective
-  Optimization},'' in \emph{Genetic and Evolutionary Computation — GECCO
-  2003}, ser. Lecture Notes in Computer Science.\hskip 1em plus 0.5em minus
-  0.4em\relax Springer Berlin Heidelberg, 2003, vol. 2723, pp. 37--48.
+  Optimization}.''\hskip 1em plus 0.5em minus 0.4em\relax Springer Berlin
+  Heidelberg, 2003, vol. 2723, pp. 37--48.
 
 \bibitem{Micro}
 C.~{Coello Coello Coello} and G.~{Toscano Pulido}, ``{A Micro-Genetic Algorithm
-  for Multiobjective Optimization},'' in \emph{Evolutionary Multi-Criterion
-  Optimization}, ser. Lecture Notes in Computer Science.\hskip 1em plus 0.5em
-  minus 0.4em\relax Springer Berlin Heidelberg, 2001, vol. 1993, pp. 126--140.
+  for Multiobjective Optimization}.''\hskip 1em plus 0.5em minus 0.4em\relax
+  Springer Berlin Heidelberg, 2001, vol. 1993, pp. 126--140.
 
 \bibitem{Energy_9}
 D.~Borgetto, H.~Casanova, G.~{Da Costa}, and J.~M. Pierson, ``{Energy-aware
@@ -168,14 +158,12 @@ D.~Borgetto, H.~Casanova, G.~{Da Costa}, and J.~M. Pierson, ``{Energy-aware
 \bibitem{khanesar2007novel}
 M.~A.~S. {Mojtaba Ahmadieh Khanesar, Mohammad Teshnehlab}, M.~A. Khanesar,
   M.~Teshnehlab, and M.~A. Shoorehdeli, ``{A novel binary particle swarm
-  optimization},'' in \emph{Particle Swarm Optimization}, vol.~1, no.~1.\hskip
-  1em plus 0.5em minus 0.4em\relax IEEE, 2007, pp. 1--6.
+  optimization},'' vol.~1, no.~1.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
+  2007, pp. 1--6.
 
 \bibitem{1004478}
 E.~Laskari, K.~Parsopoulos, and M.~Vrahatis, ``{Particle swarm optimization for
-  integer programming},'' in \emph{Proceedings of the 2002 Congress on
-  Evolutionary Computation. CEC'02 (Cat. No.02TH8600)}, vol.~2, 2002, pp.
-  1582--1587.
+  integer programming},'' vol.~2, 2002, pp. 1582--1587.
 
 \bibitem{xue2013particle}
 B.~Xue, M.~Zhang, S.~Member, and W.~N. Browne, ``{Particle swarm optimization
@@ -201,8 +189,7 @@ C.~A.~C. Coello, ``{Theoretical and numerical constraint-handling techniques
 
 \bibitem{Service_dataset}
 Y.~Zhang, Z.~Zheng, and M.~R. Lyu, ``{Exploring latent features for
-  memory-based QoS prediction in cloud computing},'' in \emph{Proceedings of
-  the IEEE Symposium on Reliable Distributed Systems}, 2011, pp. 1--10.
+  memory-based QoS prediction in cloud computing},'' 2011, pp. 1--10.
 
 \bibitem{Zitzler1998}
 E.~Zitzler and L.~Thiele, \emph{{Multiobjective optimization using evolutionary
@@ -213,8 +200,7 @@ E.~Zitzler and L.~Thiele, \emph{{Multiobjective optimization using evolutionary
 \bibitem{1501598}
 M.~A. Villalobos-Arias, G.~T. Pulido, and C.~A. {Coello Coello}, ``{A proposal
   to use stripes to maintain diversity in a multi-objective particle swarm
-  optimizer},'' in \emph{Proceedings - 2005 IEEE Swarm Intelligence Symposium,
-  SIS 2005}, vol. 2005, 2005, pp. 23--30.
+  optimizer},'' vol. 2005, 2005, pp. 23--30.
 
 \bibitem{veldhuizen99}
 D.~a. {Van Veldhuizen}, ``{Multiobjective Evolutionary Algorithms:
@@ -223,10 +209,8 @@ D.~a. {Van Veldhuizen}, ``{Multiobjective Evolutionary Algorithms:
 
 \bibitem{xin2009particle}
 J.~Xin, G.~Chen, and Y.~Hai, ``{A particle swarm optimizer with multi-stage
-  linearly-decreasing inertia weight},'' in \emph{Proceedings of the 2009
-  International Joint Conference on Computational Sciences and Optimization,
-  CSO 2009}, vol.~1.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2009, pp.
-  505--508.
+  linearly-decreasing inertia weight},'' vol.~1.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE, 2009, pp. 505--508.
 
 \bibitem{qi1994theoretical}
 X.~Qi and F.~Palmieri, ``{Theoretical Analysis of Evolutionary Algorithms with
@@ -241,9 +225,7 @@ N.~Vidyarthi and S.~Jayaswal, ``{Efficient solution of a class of location –
 
 \bibitem{5961695}
 {\'{I}}.~Goiri, K.~Le, J.~Guitart, J.~Torres, and R.~Bianchini, ``{Intelligent
-  placement of datacenters for internet services},'' in \emph{Proceedings -
-  International Conference on Distributed Computing Systems}, 2011, pp.
-  131--142.
+  placement of datacenters for internet services},'' 2011, pp. 131--142.
 
 \bibitem{lin2014solving}
 C.~K. Y.~C. Lin, ``{Solving a Location, Allocation, and Capacity Planning
@@ -251,22 +233,19 @@ C.~K. Y.~C. Lin, ``{Solving a Location, Allocation, and Capacity Planning
   \emph{Mathematical Problems in Engineering}, vol. 2014, pp. 1--25, 2014.
 
 \bibitem{TorrentFontbona20134593}
-F.~Torrent-Fontbona, V.~Mu??oz, and B.~L??pez, ``{Solving large immobile
+F.~Torrent-Fontbona, V.~Muñoz, and B.~López, ``{Solving large immobile
   location-Allocation by affinity propagation and simulated annealing.
   Application to select which sporting event to watch},'' \emph{Expert Systems
   with Applications}, vol.~40, no.~11, pp. 4593--4599, 2013.
 
 \bibitem{6557869}
 Y.~Kessaci, N.~Melab, and E.~G. Talbi, ``{A pareto-based genetic algorithm for
-  optimized assignment of VM requests on a cloud brokering environment},'' in
-  \emph{2013 IEEE Congress on Evolutionary Computation, CEC 2013}, 2013, pp.
-  2496--2503.
+  optimized assignment of VM requests on a cloud brokering environment},''
+  2013, pp. 2496--2503.
 
 \bibitem{Phan8}
 D.~H. Phan, J.~Suzuki, R.~Carroll, S.~Balasubramaniam, W.~Donnelly, and
-  D.~Botvich, ``{Evolutionary multiobjective optimization for green clouds},''
-  in \emph{Proceedings of the 14th International Conference on Genetic and
-  Evolutionary Computation Conference Companion - GECCO Companion '12}, ser.
-  GECCO '12.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2012, p.~19.
+  D.~Botvich, ``{Evolutionary multiobjective optimization for green
+  clouds}.''\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2012, pp. 19--27.
 
 \end{thebibliography}

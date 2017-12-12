@@ -72,7 +72,7 @@ E-mail: \{boxiong.tan, hui.ma, yi.mei, mengjie.zhang\}@ecs.vuw.ac.nz}
 
 \IEEEtitleabstractindextext{
 \begin{abstract}
-With the ever increasing number of functionally similar web services being available on the Internet, the market competition is becoming intense. Web service providers (WSPs) realize that good Quality of Service (QoS) is a key of business success and low network latency is a critical measurement of good QoS. Because network latency is related to location, a straightforward way to reduce network latency is to allocate services to proper locations. However, Web Service Location Allocation Problem (WSLAP) is a challenging task since there are multiple objectives potentially conflicting with each other and the solution search space has a combinatorial nature. In this paper, we consider minimizing the network latency and total cost simultaneously and model the WSLAP as a multi-objective optimization problem. We develop a new PSO-based algorithm to provide a set of trade-off solutions. The results how that the new algorithm can provide a diverse set of solutions than the compared three well known multi-objective optimization algorithms.
+With the ever increasing number of functionally similar web services being available on the Internet, the market competition is becoming intense. Web service providers (WSPs) realize that good Quality of Service (QoS) is a key of business success and low network latency is a critical measurement of good QoS. Because network latency is related to location, a straightforward way to reduce network latency is to allocate services to proper locations. However, Web Service Location Allocation Problem (WSLAP) is a challenging task since there are multiple objectives potentially conflicting with each other and the solution search space has a combinatorial nature. In this paper, we consider minimizing the network latency and total cost simultaneously and model the WSLAP as a multi-objective optimization problem. We develop a new PSO-based algorithm to provide a set of trade-off solutions. The results show that the new algorithm can provide a more diverse range of solutions than the compared three well known multi-objective optimization algorithms.
 Moreover, the new algorithm performs better especially on large problems.
 \end{abstract}
 
@@ -109,7 +109,7 @@ Multi-objective evolutionary algorithms (MOEAs) can address the above drawbacks 
 
 To address WSLAP as a multi-objective problem, we first proposed an aggregation approach with Binary Particle Swarm Optimization (BPSO) \cite{Tan2016a}. Even though the BPSO approach can solve the problem, a single-objective algorithm can only provide one solution for each run, hence, BPSO cannot provide alternatives when service providers do not have preferences. Therefore, we further investigated a Pareto front approach \cite{Tan2016} with Sorting Genetic Algorithm-II (NSGA-II).
 
-Solutions from BPSO and NSGA-II suggest that the proposed multi-objective approaches suit the problem well. This is because BPSO and NSGA-II are population-based algorithms. Multi-objective Optimization Evolutionary Algorithm (MOEA) methodologies are ideal \cite{key:article} for solving combinatorial optimization problems \cite{tuladhar2016multi,senouci2016static}.
+Solutions from BPSO and NSGA-II suggest that the proposed multi-objective approaches suit the problem well. This is because BPSO and NSGA-II are population-based algorithms. MOEA methodologies are ideal \cite{key:article} for solving combinatorial optimization problems \cite{tuladhar2016multi,senouci2016static}.
 
 However, we also found a disadvantage in both BPSO and NSGA-II. Their performances (in terms of convergence) drop rapidly when the problem size increases. In addition, the diversity of solutions is not maintained when problem size grows. 
 
@@ -166,13 +166,13 @@ Then, the Pareto optimality is defined as follows.
 \end{definition}
 
 
-To measure the performance of a multi-objective optimization algorithm, three aspects need to be considered \cite{Okabe:je,7360024}: convergence, diversity and the number of solutions.
+To measure the performance of a multi-objective optimization algorithm, three aspects need to be considered \cite{Okabe:je,7360024}: convergence, diversity, and the number of solutions.
 Convergence denotes the closeness between a non-dominated solution set to the theoretical Pareto front. Diversity denotes the distribution and spread of a non-dominated solution set.
 
 \subsection{Evolutionary Multi-objective Optimization}
 The Evolutionary Computation (EC) method is good at solving multi-objective optimization problems due to its capability of maintaining a set of solutions in its population. It finds a set of Pareto-optimal solutions in a single run. Evolutionary Multi-objective Optimization (EMO) has been extensively studied, and numerous EMO algorithms have been proposed.
 
-NSGA-II \cite{nsgaii} is a widely used multi-objective algorithm. NSGA-II proposed two innovative approaches: fast non-dominated sorting and crowding distance comparison-based diversity preservation. 
+NSGA-II \cite{nsgaii} is a widely used multi-objective algorithm. NSGA-II proposes two innovative approaches: fast non-dominated sorting and crowding distance comparison-based diversity preservation. 
 Strength Pareto Evolutionary Algorithm (SPEA2)\cite{kim2004spea2} uses an external archive to store non-dominated solutions and a nearest neighbor density estimation technique to guide the search process. MOEA/D \cite{zhang2007moea} decomposes a multi-objective problem into a number of scalar optimization subproblems and optimizes them simultaneously.
 
 % MOEA/D has a lower computational complexity than NSGA-II and a better performance on multiobjective 0-1 knapsack problems and continuous optimization problems.
@@ -354,7 +354,7 @@ f_1 & = \sum\limits_{1=1}^s \sum\limits_{j = 1}^n C_{ij} X_{ij}\\
 & = 236
 \end{align*}
 
-To calculate the overall network latency, we need to first calculate the response time matrix $R$ using the matrices $L$ and $X$. For each service $W_i$, by checking matrix $X$, we can find out which locations the service has been deployed in. Then, we check matrix $L$ to find out the corresponding latency from each deployed location $A_j$ to each user center $U_k$. Finally, the smallest latency is selected to be the response time from each service $W_i$ to each user center $U_k$. In the above example, the corresponding response matrix is
+To calculate the overall network latency, we need to first calculate the response time matrix $R$ using the matrices $L$ and $X$. For each service $W_i$, by checking matrix $X$, we found out which locations the service has been deployed in. Then, we check matrix $L$ to find out the corresponding latency from each deployed location $A_j$ to each user center $U_k$. Finally, the smallest latency is selected to be the response time from each service $W_i$ to each user center $U_k$. In the above example, the corresponding response matrix is
 $$
 R = \bbordermatrix{~ & W_{1} & W_{2} & W_{3}\cr
 	U_{1}	&0 &2.8 &2.8	\cr
@@ -437,11 +437,11 @@ The threshold value $\theta$ is ad-hoc and is usually set based on empirical stu
    0 & \quad \text{otherwise} \\
   \end{cases}
  \end{equation}
-\vspace{-8 mm}
+\vspace{-5 mm}
 
 \subsubsection{Dynamic Rounding Functions}
 \label{sec:dynamic}
-The threshold plays an important role in searching for solutions for a given problem \cite{Tan2016a}. The static rounding function has the following drawbacks. Firstly, it needs to be predefined and problem specific. It is hard to estimate the effect of $\theta$ before observing results. Secondly, the influence of different threshold values is not completely studied. Therefore, we propose dynamic rounding functions have two steps. First, the function adjusts the value of threshold $\theta$ according to two predefined parameters: a lower bound $l$ and an upper bound $u$ of the threshold ($l < u$), and a dynamic parameter: the current generation $t$. The second step either rounds up or down the value of $X_{ij}$ according to $\theta$. Three dynamic rounding functions: \emph{linear function}, \emph{Quadratic function} and \emph{Reciprocal function} are considered. Specifically, current generation $t$ cannot equal $max\_gen$ in order to keep the result valid. 
+The threshold plays an important role in searching for solutions for a given problem \cite{Tan2016a}. The static rounding function has the following drawbacks. Firstly, it needs to be predefined and problem specific. It is hard to estimate the effect of $\theta$ before observing results. Secondly, the influence of different threshold values is not completely studied. Therefore, we propose dynamic rounding functions have two steps. First, the function adjusts the value of threshold $\theta$ according to two predefined parameters: a lower bound $l$ and an upper bound $u$ of the threshold ($l < u$), and a dynamic parameter: the current generation $t$. The second step either rounds up or down the value of $X_{ij}$ according to $\theta$. Three dynamic rounding functions: \emph{Linear function}, \emph{Quadratic function} and \emph{Reciprocal function} are considered. Specifically, current generation $t$ cannot equal $max\_gen$ in order to keep the result valid. 
 \vspace{-3 mm}
 \begin{equation}
 \label{eq:linear}
@@ -456,7 +456,7 @@ The threshold plays an important role in searching for solutions for a given pro
  \theta_{recip} = u - \frac{u - l}{\text{max\_gen} - t}  (t \neq \text{max\_gen})
 \end{equation}
 
-The reason we design three dynamic functions is to compare the impact of different trajectories of dynamic thresholds (see Figure \ref{fig:dynamic}. 
+The reason that we design three dynamic functions is to compare the impact of different trajectories of dynamic thresholds (see Figure \ref{fig:dynamic}. 
 % the three dynamic functions' trajectories are shown in Figure \ref{fig:dynamic} with $l$ being set to 0.3, $u$ being set to 0.7, and $max\_gen$ being set to 50 as an example. The principle for setting the lower and upper bound is based on the empirical study of static rounding function in Section \ref{sec:result_static}. 
 The threshold values with a Linear function are uniformly distributed, whereas Reciprocal and Quadratic functions are unevenly distributed. The performances of these rounding functions are studied in Section \ref{sec:expdy}. 
 
@@ -606,7 +606,7 @@ All algorithms were implemented in R version 3.3.3 and the experiments were cond
 \subsection{Comparison Design}
 We use different ways to compare three variants of BMOPSOCD, and BMOPSOCD with other algorithms (e.g NSGA-II). The major difference is that we compare three variants with the solutions from a single run while we compare BMOPSOCD and other algorithms with their best solutions from 40 runs.
 
-Explicitly, for comparing three variants of BMOPSOCD, we first find out the median hypervolume value (explained in Section \ref{sec:metrics}) in 40 runs. Then we find out in which run that the variant of BMOPSOCD produces the median hypervolume value. Finally, we plot the solutions from that run in terms of two objectives fitness values.
+Explicitly, for comparing three variants of BMOPSOCD, we first find out the median HyperVolume value (explained in Section \ref{sec:metrics}) in 40 runs. Then we find out in which run that the variant of BMOPSOCD produces the median HyperVolume value. Finally, we plot the solutions from that run in terms of two objectives fitness values.
 
 For comparing BMOPSOCD and other algorithms, we first aggregate the solutions from 40 runs and then apply an non-dominated sorting on the aggregated results to find the best results from that algorithm. Finally, we plot the solutions. 
 
@@ -614,7 +614,7 @@ All fitness values are normalized between 0 and 1 with linear normalization meth
 The normalization method requires the maximum and minimum values of cost and response time 
 that we found during optimization. 
 
-We obtained these extreme values as follows. For each instance, we collected the solutions from all the four compared algorithms:NSGA-II, BPSO, NSPSO, and BMOPSOCD. Then, we applied non-dominated sorting on these solutions to obtain the non-dominated solutions. Finally, we can find the extreme values of cost and response time from the non-dominated solutions among all the solutions found by all the compared algorithms.
+We obtained these extreme values as follows. For each instance, we collected the solutions from all the four compared algorithms: NSGA-II, BPSO, NSPSO, and BMOPSOCD. Then, we applied non-dominated sorting on these solutions to obtain the non-dominated solutions. Finally, we can find the extreme values of cost and response time from the non-dominated solutions abtained from all the solutions found by all the compared algorithms.
 
 \subsection{Test instances}
 \label{sec:datasets}
@@ -628,8 +628,8 @@ We designed 14 test instances with increasing size of search space (see Table \r
 
 
 
-We constructed test instances based on real-world WS-Dream dataset \cite{Service_dataset}. The data
-contains only the latencies between candidate locations and user centers, but lacks the deployment costs for candidate locations and invocation frequencies for web services. Therefore, to generate a complete WSLAP instance, we randomly generated the deployment costs for candidate locations according to a normal distribution with the mean of 100 and standard deviation of 20. We generated the invocation frequency from a uniform distribution between 1 and 120. 
+We constructed test instances based on real-world WS-Dream dataset \cite{Service_dataset}. The dataset
+contains only the latencies between candidate locations and user centers, but lacks the deployment costs for candidate locations and invocation frequencies for web services. Therefore, to generate a complete WSLAP instance, we randomly generated the deployment costs for candidate locations according to a normal distribution with the mean of 100 and standard deviation of 20. We generated the invocation frequencies from a uniform distribution between 1 and 120. 
 
 % The \textit{WS-Dream} dataset includes a network latency matrix between 339 user centers and 5825 candidate locations. In this project, there are mainly three matrices to be provided: network latencies between candidate locations and user centers, deployment cost in candidate locations, and web service invocation frequency. In principle, deployment cost can be either fixed fees (monthly rent) or variable fees (e.g. depending on storage and other resource usages). For the sake of simplicity, we consider fixed deployment fee.
 
@@ -643,20 +643,20 @@ contains only the latencies between candidate locations and user centers, but la
 \begin{tabular}{l|c|c|c|c}
 \hline
 Test instances   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No. of \\ Services\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No. of \\ Candidate Locations\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No. of \\ user centers\end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}Size of \\ search space\end{tabular}}\\ \hline
-Instance 1  & 20                                                                             & 5                                                                                         & 10 & $2^{100}$ \Tstrut                                                                                 \\ \hline
-Instance 2  & 20                                                                                                                                                                    & 10 & 10 & $2^{200}$ \Tstrut                                                                                \\ \hline
-Instance 3  & 50                                                                             & 15                                                                                        & 20 & $2^{750}$ \Tstrut                                                                                 \\ \hline
-Instance 4  & 50                                                                             & 15                                                                                        & 40& $2^{750}$  \Tstrut                                                                                \\ \hline
-Instance 5  & 50                                                                             & 25                                                                                        & 20 & $2^{1250}$ \Tstrut                                                                                 \\ \hline
-Instance 6  & 50                                                                             & 25                                                                                        & 40 & $2^{1250}$ \Tstrut                                                                                  \\ \hline
-Instance 7  & 100                                                                            & 15                                                                                        & 20 & $2^{1500}$  \Tstrut                                                                                \\ \hline
-Instance 8  & 100                                                                            & 15                                                                                        & 40& $2^{1500}$  \Tstrut                                                                                \\ \hline
-Instance 9  & 100                                                                            & 25                                                                                        & 20 & $2^{2500}$ \Tstrut                                                                                 \\ \hline
-Instance 10 & 100                                                                            & 25                                                                                        & 40 & $2^{2500}$  \Tstrut                                                                                \\ \hline
-Instance 11 & 200                                                                            & 25                                                                                        & 40 & $2^{5000}$  \Tstrut                                                                                \\ \hline
-Instance 12 & 200                                                                            & 25                                                                                        & 80& $2^{5000}$    \Tstrut                                                                              \\ \hline
-Instance 13 & 200                                                                            & 40                                                                                        & 40& $2^{8000}$   \Tstrut                                                                               \\ \hline
-Instance 14 & 200                                                                            & 40                                                                                        & 80 & $2^{8000}$  \Tstrut                                                                                \\ \hline
+instance 1  & 20                                                                             & 5                                                                                         & 10 & $2^{100}$ \Tstrut                                                                                 \\ \hline
+instance 2  & 20                                                                                                                                                                    & 10 & 10 & $2^{200}$ \Tstrut                                                                                \\ \hline
+instance 3  & 50                                                                             & 15                                                                                        & 20 & $2^{750}$ \Tstrut                                                                                 \\ \hline
+instance 4  & 50                                                                             & 15                                                                                        & 40& $2^{750}$  \Tstrut                                                                                \\ \hline
+instance 5  & 50                                                                             & 25                                                                                        & 20 & $2^{1250}$ \Tstrut                                                                                 \\ \hline
+instance 6  & 50                                                                             & 25                                                                                        & 40 & $2^{1250}$ \Tstrut                                                                                  \\ \hline
+instance 7  & 100                                                                            & 15                                                                                        & 20 & $2^{1500}$  \Tstrut                                                                                \\ \hline
+instance 8  & 100                                                                            & 15                                                                                        & 40& $2^{1500}$  \Tstrut                                                                                \\ \hline
+instance 9  & 100                                                                            & 25                                                                                        & 20 & $2^{2500}$ \Tstrut                                                                                 \\ \hline
+instance 10 & 100                                                                            & 25                                                                                        & 40 & $2^{2500}$  \Tstrut                                                                                \\ \hline
+instance 11 & 200                                                                            & 25                                                                                        & 40 & $2^{5000}$  \Tstrut                                                                                \\ \hline
+instance 12 & 200                                                                            & 25                                                                                        & 80& $2^{5000}$    \Tstrut                                                                              \\ \hline
+instance 13 & 200                                                                            & 40                                                                                        & 40& $2^{8000}$   \Tstrut                                                                               \\ \hline
+instance 14 & 200                                                                            & 40                                                                                        & 80 & $2^{8000}$  \Tstrut                                                                                \\ \hline
 \end{tabular}
 }
 \end{table}
@@ -678,7 +678,7 @@ The ``empirical value'' means we tried several values for the number of generati
 We chose the minimum number of generation that allows all the four compared algorithms converging. Hence, it is fair for all compared algorithms
 
 
-We use (1, 1) as the reference point in Hypervolume. Because we normalize two objectives between 0 and 1, reference point (1, 1) is the extreme point of objective values. Moreover, we do not have particular preference to objectives. Therefore, a balanced point (1, 1) is suitable for the reference point.
+We use (1, 1) as the reference point in HyperVolume. Because we normalize two objectives between 0 and 1, reference point (1, 1) is the extreme point of objective values. Moreover, we do not have particular preference to objectives. Therefore, a balanced point (1, 1) is suitable for the reference point.
 
 For each experiment, the proposed algorithm was run for 40 times independently. The best results of all the runs are compared.  To obtain the \emph{best result} of 40 runs, the results of all 40 runs are combined and sorted by the fast non-dominated sorting \cite{nsgaii}.
 
@@ -705,7 +705,7 @@ $c_2$      & 1 \cite{Raquel}    & HV reference point & (1, 1) \\ \bottomrule
 % \usepackage{booktabs}
 
 \subsection{Experiments on Rounding Functions}\label{sec:expRound}
-This section designs four experiments to study the effect of different types of rounding functions. We applied Wilcoxon signed rank test on all results between variants of BMOPSOCD. We choose these four representative instances (Instances 2 to 5) to show the results. The other test instances showed similar patterns.
+This section designs four experiments to study the effect of different types of rounding functions. We applied Wilcoxon signed rank test on all results between variants of BMOPSOCD. We chose these four representative instances (instances 2 to 5) to show the results. The other test instances showed similar patterns.
 
 % The cost constraint is not considered in these experiments since it is not the study priority.
 % The repair function of NSGA-II will also only use the Web service number constraint.
@@ -726,7 +726,7 @@ There are two questions that we would like to answer with this experiment. The f
 A representative result is given in Figure \ref{fig:fullThreshold}, where each color represents a threshold value and each point denotes a service allocation solution in the 2D objective space. It shows that in the BMOPSOCD with a different static threshold value will lead to solutions covering a different partial region of the Pareto front. 
 
 The impact of a static threshold can be explained as a preference factor between two objectives. Take the threshold value of 0.7 as an example, 
-when the rounding function rounds a real value to a binary value with the threshold of 0.7, it means that 70\% of probability rounds this value to zero. It denotes that there are 70\% of chance does not deploy a web service in a location. 
+when the rounding function rounds a real value to a binary value with the threshold of 0.7, it means that 70\% of probability rounds this value to zero. It denotes that there are 70\% of chances not deploying a web service in a location. 
 Intuitively, the optimization with threshold of 0.7 would consider optimizing cost over latency by deploying fewer web services. The swarm is under the 
 guidance of a ``savings'' policy. 
 
@@ -771,7 +771,7 @@ In Section \ref{sec:dynamic}, three dynamic rounding functions are proposed. In 
 
 \subsubsection{Comparison between Dynamic Rounding Functions}
 \label{sec:expdy}
-Table \ref{tab:hyperDynamic} shows the average performance of the three dynamic functions that are evaluated by hypervolume.
+Table \ref{tab:hyperDynamic} shows the average performance of the three dynamic functions that are evaluated by HyperVolume.
 The results indicate that the Reciprocal function outperformed other two dynamic functions in all test cases. This could be visually observed by plotting the best results (Figure \ref{fig:dynamicFunctions}).
 Figure \ref{fig:dynamicFunctions} shows that the Reciprocal function slightly dominates the other two dynamic functions. However, the problem of the Reciprocal function is that it may miss some regions in the Pareto front, e.g. the regions between dashed-vertical lines of 0.45 and 0.55 in Figure \ref{fig:dynamicFunctions}. The gap is created because of the lack of uniformity (Figure \ref{fig:dynamic}).
 
@@ -801,7 +801,7 @@ Figure \ref{fig:dynamicFunctions} shows that the Reciprocal function slightly do
 \begin{table}[H]
 \centering
 \footnotesize
-\caption{The mean and standard deviation of the hypervolume values over the 40 independent runs}
+\caption{The mean and standard deviation of the HyperVolume values over the 40 independent runs}
 \label{tab:hyperDynamic}
 \begin{tabular}{l|c|c|c}
 \hline
@@ -820,24 +820,24 @@ slightly worse in convergence but obtains a good-coverage non-dominated set. The
 
 The better convergence with the Reciprocal function can be explained, as there is a minor change in threshold in the most generations and the swarm has a longer time to search along the same direction. However, with the Linear and Quadratic function, the constant changing in direction does not give the algorithm enough time to find a good solution.
 
-Between the Quadratic function and the Linear function, their changing rate of threshold value are different: Linear function changes equally, while Quadratic function changes little at the beginning and then become larger. As the swarm searches the low-cost region (as the threshold starts decreasing from 0.7) and moves to high-cost region, it has more time to search in the low-cost region with the Quadratic function. This is the key reason that the performance of Quadratic function is better than that of Linear function, because we have observed that the number of solutions in the low-cost region is much smaller than in the high-cost region, as shown in Figure \ref{fig:staticFunctions}, the low-cost regions are quite sparse compare with the low-latency regions. Therefore, it is reasonable to give the algorithm more time to search the low-cost region, while, in the low-latency region, the algorithm can spend much less effort because the solutions are rich. In general, algorithm with Quadratic function obtains better solutions in the low-cost region than with Linear function.
+Between the Quadratic function and the Linear function, their changing rate of threshold value are different: the Linear function changes equally, while the Quadratic function changes little at the beginning and then become larger. As the swarm searches the low-cost region (as the threshold starts decreasing from 0.7) and moves to high-cost region, it has more time to search in the low-cost region with the Quadratic function. This is the key reason that the performance of the Quadratic function is better than that of Linear function, because we have observed that the number of solutions in the low-cost region is much smaller than in the high-cost region, as shown in Figure \ref{fig:staticFunctions}, the low-cost regions are quite sparse compare with the low-latency regions. Therefore, it is reasonable to give the algorithm more time to search the low-cost region, while, in the low-latency region, the algorithm can spend much less effort because the solutions are rich. In general, algorithm with the Quadratic function obtains better solutions in the low-cost region than with Linear function.
 
-From table \ref{tab:hyperDynamic}, in terms of hypervolume, the Reciprocal function has the best performance. However, we can observe that the Reciprocal function cannot provide a good coverage of the Pareto front in Figure \ref{fig:dynamicFunctions}. That is, the Reciprocal function missed many useful solutions because it lacks uniformity. Therefore, we cannot determine which algorithm is better solely 
-depending on the hypervolume values. We conclude that the Quadratic function performances the best. Although the Quadratic function is worse than the Reciprocal function in terms of hypervolume value, the disadvantage of Reciprocal function cannot be ignored.
+From table \ref{tab:hyperDynamic}, in terms of HyperVolume, the Reciprocal function has the best performance. However, we can observe that the Reciprocal function cannot provide a good coverage of the Pareto front in Figure \ref{fig:dynamicFunctions}. That is, the Reciprocal function missed many useful solutions because it lacks uniformity. Therefore, we cannot determine which algorithm is better solely 
+depending on the HyperVolume values. We conclude that the Quadratic function performances the best. Although the Quadratic function is worse than the Reciprocal function in terms of HyperVolume value, the disadvantage of Reciprocal function cannot be ignored.
 
 \subsubsection{Stepped Rounding Function}
 We study the performance of the Stepped rounding function in this experiment. The upper and lower bound $u$ and $l$ are set to 0.7 and 0.3 respectively. The interval is set to 10 generations. The results are compared with dynamic functions.
 
 \subsubsection{Results for the Stepped Rounding function}
 We compared the performance of the Stepped rounding function with the Reciprocal rounding function. The averages of HV of three rounding functions are shown in Table \ref{tab:transfercomp}. Table \ref{tab:transfercomp} shows that in terms of HV, Reciprocal function performs better than the Stepped threshold approach in most cases.
-However, Figure \ref{fig:transfer} shows that the Stepped rounding function dominates in Instance 3 and has better diversity in Instance 4.
+However, Figure \ref{fig:transfer} shows that the Stepped rounding function dominates in instance 3 and has better diversity in instance 4.
 The results indicate that the Stepped rounding function could provide a uniformly distributed non-dominated set.
-Overall, the performance of the Stepped rounding function is very close to the Reciprocal function and almost the same with Quadratic function.
+Overall, the performance of the Stepped rounding function is very close to the Reciprocal function and almost the same with the Quadratic function.
 
 \begin{table}[]
 \centering
 \footnotesize
-\caption{A comparison between Reciprocal function and Stepped function, the mean and standard deviation of hypervolume values over the 40 independent runs}
+\caption{A comparison between Reciprocal function and Stepped function, the mean and standard deviation of HyperVolume values over the 40 independent runs}
 \label{tab:transfercomp}
 \begin{tabular}{l|c|c}
 \hline
@@ -905,8 +905,8 @@ the sets obtained by 40 independent runs of combination of static thresholds and
 \subsection{BMOPSOCD versus BNSPSO, NSGA-II, and BPSO}
 
 To evaluate the performance of our proposed BMOPSOCD with dynamic function, we conducted experiments to compare its performance with
-BNSPSO, BPSO from our previous research \cite{Tan2016a}, and NSGA-II from \cite{Tan2016}. Based on the analysis in Section \ref{sec:expRound}, we use the Quadratic function as the rounding function. The results are shown in Table \ref{tab:results} and in Figure \ref{fig:total}. The figures show that our propose BMOPSOCD dominate other algorithms in IGD (the small the better) and dominate other algorithms in HV (the bigger the better) except the instance 1. The margin between BMOPSOCD and other algorithms are huge. We can also observe a decline trend in the performance of other algorithms in HV. But the performance of BMOPSOCD maintains well in large test instances.
-The only exception is Instance 1, BPSO has the best HV value. On all instances, the p value between BMOPSOCD is less than $10^{-10}$ which means BMOPSOCD is significantly better. In addition, only BMOPSOCD shows an excellent performance in terms of HV, when the number of variables increases. On all instances, BMOPSOCD achieved a considerably better performance than other three algorithms in IGD, due to the better coverage.
+BNSPSO, BPSO from our previous research \cite{Tan2016a}, and NSGA-II from \cite{Tan2016}. Based on the analysis in Section \ref{sec:expRound}, we use the Quadratic function as the rounding function. The results are shown in Table \ref{tab:results} and in Figure \ref{fig:total}. The figures show that our proposed BMOPSOCD dominate other algorithms in IGD (the small the better) and dominate other algorithms in HV (the bigger the better) except the instance 1. The margin between BMOPSOCD and other algorithms are huge. We can also observe a decline trend in the performance of other algorithms in HV. But the performance of BMOPSOCD maintains well in large test instances.
+The only exception is instance 1, BPSO has the best HV value. On all instances, the $p$ value between BMOPSOCD is less than $10^{-10}$ which means BMOPSOCD is significantly better. In addition, only BMOPSOCD shows an excellent performance in terms of HV, when the number of variables increases. On all instances, BMOPSOCD achieved a considerably better performance than other three algorithms in IGD, due to the better coverage.
 
 In comparison with BNSPSO and NSGA-II, BMOPSOCD with dynamic rounding function achieved significantly better convergence and diversity. One reason is that with the dynamic
 rounding function, BMOPSOCD could move out of local optima. 
@@ -914,15 +914,15 @@ rounding function, BMOPSOCD could move out of local optima.
 Other reason is the BMOPSOCD
 keeps an external archive. Although the three algorithms maintain the same population, they produce different sizes of solutions. BMOPSOCD outputs an archive with a size of 250 while other two algorithms output a population of size 50.
 
-In Instance 1, the convergence of BMOPSOCD is worse than that of BPSO. 
+In instance 1, the convergence of BMOPSOCD is worse than that of BPSO. 
 % One reason is that BPSO runs 50 generations with the same weight for both objectives, it has more time to search alone the same direction. On the other hand, with dynamic rounding function, MOSPCOD might not completely converge. 
 One reason is related to the problem size. BPSO has better performance in small problems. When the problem size increases, its performance drops rapidly. In contrast, BMOPSOCD with the dynamic rounding function is not much affected by the number of variables.
 
 % \begin{figure*}
 % \centering
 %   \includegraphics[width=0.7\textwidth]{pics/hv.png}
-%   \caption{Hypervolume of BMOPSOCD, BNSPSO, NSGA-II and BPSO from 14 instances}
-%   \label{fig:final_hypervolume}
+%   \caption{HyperVolume of BMOPSOCD, BNSPSO, NSGA-II and BPSO from 14 instances}
+%   \label{fig:final_HyperVolume}
 % \end{figure*}
 % \begin{figure*}
 % \centering
@@ -944,13 +944,13 @@ One reason is related to the problem size. BPSO has better performance in small 
 \begin{tabular}{|c|l|c|c|}
 \hline
 instances                         & \multicolumn{1}{c|}{Method}                                              & HV (avg $\pm$ sd)                                                                                                     & \multicolumn{1}{l|}{IGD (avg $\pm$ sd)}                                                                                                    \\ \hline
-instance 1                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}0.83 $\pm$ 0.04\\ 0.76 $\pm$ 0.018\\ 0.83 $\pm$ 0.013\\ \textbf{0.89 $\pm$ 0.015} \end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{3.73E-02 $\pm$ 1.03E-02} \\ 0.16 $\pm$ 3.45E-02\\  0.19 $\pm$ 3.21E-02\\ 0.46 $\pm$ 2.45E-02\end{tabular} \\ \hline
-instance 2                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.73 $\pm$ 0.011} \\ 0.61 $\pm$ 0.001\\ 0.60 $\pm$ 0.011\\  0.61 $\pm$ 0.001\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{3.15E-02 $\pm$ 7.92E-03} \\ 0.15 $\pm$ 1.46E-02\\ 0.19 $\pm$ 1.81E-02\\  0.42 $\pm$ 1.54E-02\end{tabular} \\ \hline
-instance 3                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.81 $\pm$ 0.012} \\ 0.61 $\pm$ 0.011\\ 0.59 $\pm$ 0.008\\ 0.69 $\pm$ 0.007\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{7.03E-03 $\pm$ 1.92E-03} \\ 0.10 $\pm$ 6.35E-03\\ 0.16 $\pm$ 7.25E-03\\  0.30 $\pm$ 8.94E-03\end{tabular} \\ \hline
-instance 4                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.83 $\pm$ 0.016} \\ 0.63 $\pm$ 0.012\\ 0.61 $\pm$ 0.008\\ 0.71 $\pm$ 0.008\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{5.80E-03 $\pm$ 1.37E-03} \\ 0.11 $\pm$ 8.55E-03\\ 0.17 $\pm$ 9.11E-03 \\ 0.30 $\pm$ 8.62E-03\end{tabular} \\ \hline
-instance 5                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.84 $\pm$ 0.014} \\ 0.61 $\pm$ 0.009\\ 0.58 $\pm$ 0.005\\ 0.67 $\pm$ 0.007\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{3.74E-03 $\pm$ 1.02E-03} \\ 0.11 $\pm$ 7.93E-03\\ 0.17 $\pm$ 6.89E-03\\  0.24 $\pm$ 5.02E-03\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{instance 6} & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.81 $\pm$ 0.014} \\ 0.59 $\pm$ 0.007\\ 0.55 $\pm$ 0.006\\ 0.63 $\pm$ 0.005\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{5.81E-03 $\pm$ 1.95E-03} \\ 0.11 $\pm$ 5.06E-03\\ 0.18 $\pm$ 8.01E-03 \\ 0.28 $\pm$ 5.88E-03\end{tabular} \\ \hline
-instance 7                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.79 $\pm$ 0.015} \\ 0.60 $\pm$ 0.008\\ 0.56 $\pm$ 0.005\\ 0.63 $\pm$ 0.006\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{7.13E-03 $\pm$ 1.70E-03} \\ 0.10 $\pm$ 4.58E-03\\ 0.17 $\pm$ 6.48E-03 \\ 0.27 $\pm$ 7.92E-03\end{tabular} \\ \hline
+instance 1                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}0.90 $\pm$ 0.04\\ 0.82 $\pm$ 0.018\\ 0.86 $\pm$ 0.013\\ \textbf{0.95 $\pm$ 0.015} \end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{3.73E-02 $\pm$ 1.03E-02} \\ 0.16 $\pm$ 3.45E-02\\  0.19 $\pm$ 3.21E-02\\ 0.46 $\pm$ 2.45E-02\end{tabular} \\ \hline
+instance 2                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.77 $\pm$ 0.011} \\ 0.64 $\pm$ 0.001\\ 0.65 $\pm$ 0.011\\  0.65 $\pm$ 0.001\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{3.15E-02 $\pm$ 7.92E-03} \\ 0.15 $\pm$ 1.46E-02\\ 0.19 $\pm$ 1.81E-02\\  0.42 $\pm$ 1.54E-02\end{tabular} \\ \hline
+instance 3                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.84 $\pm$ 0.012} \\ 0.64 $\pm$ 0.011\\ 0.61 $\pm$ 0.008\\ 0.71 $\pm$ 0.007\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{7.03E-03 $\pm$ 1.92E-03} \\ 0.10 $\pm$ 6.35E-03\\ 0.16 $\pm$ 7.25E-03\\  0.30 $\pm$ 8.94E-03\end{tabular} \\ \hline
+instance 4                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.86 $\pm$ 0.016} \\ 0.67 $\pm$ 0.012\\ 0.63 $\pm$ 0.008\\ 0.74 $\pm$ 0.008\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{5.80E-03 $\pm$ 1.37E-03} \\ 0.11 $\pm$ 8.55E-03\\ 0.17 $\pm$ 9.11E-03 \\ 0.30 $\pm$ 8.62E-03\end{tabular} \\ \hline
+instance 5                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.87 $\pm$ 0.014} \\ 0.63 $\pm$ 0.009\\ 0.59 $\pm$ 0.005\\ 0.69 $\pm$ 0.007\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{3.74E-03 $\pm$ 1.02E-03} \\ 0.11 $\pm$ 7.93E-03\\ 0.17 $\pm$ 6.89E-03\\  0.24 $\pm$ 5.02E-03\end{tabular} \\ \hline
+\multicolumn{1}{|l|}{instance 6} & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.84 $\pm$ 0.014} \\ 0.60 $\pm$ 0.007\\ 0.57 $\pm$ 0.006\\ 0.64 $\pm$ 0.005\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{5.81E-03 $\pm$ 1.95E-03} \\ 0.11 $\pm$ 5.06E-03\\ 0.18 $\pm$ 8.01E-03 \\ 0.28 $\pm$ 5.88E-03\end{tabular} \\ \hline
+instance 7                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.86 $\pm$ 0.015} \\ 0.62 $\pm$ 0.008\\ 0.57 $\pm$ 0.005\\ 0.65 $\pm$ 0.006\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{7.13E-03 $\pm$ 1.70E-03} \\ 0.10 $\pm$ 4.58E-03\\ 0.17 $\pm$ 6.48E-03 \\ 0.27 $\pm$ 7.92E-03\end{tabular} \\ \hline
 \end{tabular}
 \end{subtable}
 
@@ -959,13 +959,13 @@ instance 7                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\
 \begin{tabular}{|c|l|c|c|}
 \hline
 instances                         & \multicolumn{1}{c|}{Method}                                              & HV (avg $\pm$ sd)                                                                                                     & \multicolumn{1}{l|}{IGD (avg $\pm$ sd)}                                                                                                    \\ \hline
-instance 8                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.81 $\pm$ 0.015} \\ 0.61 $\pm$ 0.008\\ 0.58 $\pm$ 0.005\\ 0.65 $\pm$ 0.007\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{8.77E-03 $\pm$ 1.90E-03} \\ 0.12 $\pm$ 5.81E-03\\ 0.19 $\pm$ 6.17E-03 \\ 0.27 $\pm$ 5.86E-03\end{tabular} \\ \hline
-instance 9                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.83 $\pm$ 0.016} \\ 0.60 $\pm$ 0.009\\ 0.56 $\pm$ 0.004\\ 0.62 $\pm$ 0.005\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{3.58E-03 $\pm$ 1.53E-03} \\ 0.11 $\pm$ 5.33E-03\\ 0.17 $\pm$ 3.56E-03 \\ 0.22 $\pm$ 3.22E-03\end{tabular} \\ \hline
-instance 10                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.80 $\pm$ 0.012} \\ 0.58 $\pm$ 0.008\\ 0.53 $\pm$ 0.005\\ 0.58 $\pm$ 0.005\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{4.30E-03 $\pm$ 1.75E-03} \\ 0.11 $\pm$ 4.97E-03\\ 0.19 $\pm$ 5.62E-03 \\ 0.25 $\pm$ 3.91E-03\end{tabular} \\ \hline
-instance 11                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.79 $\pm$ 0.012} \\ 0.57 $\pm$ 0.009\\ 0.52 $\pm$ 0.003\\ 0.55 $\pm$ 0.003\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{5.19E-03 $\pm$ 1.81E-03} \\ 0.12 $\pm$ 4.22E-03\\ 0.20 $\pm$ 2.74E-03 \\ 0.24 $\pm$ 3.36E-03\end{tabular} \\ \hline
-instance 12                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.80 $\pm$ 0.01} \\ 0.58 $\pm$ 0.009\\ 0.52 $\pm$ 0.003\\ 0.56 $\pm$ 0.003\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{3.12E-03 $\pm$ 6.71E-04} \\ 0.12 $\pm$ 4.15E-03\\ 0.20 $\pm$ 3.08E-03 \\ 0.24 $\pm$ 2.50E-03\end{tabular} \\ \hline
-instance 13                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.83 $\pm$ 0.012} \\ 0.59 $\pm$ 0.008\\ 0.53 $\pm$ 0.003\\ 0.56 $\pm$ 0.004\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{2.63E-03 $\pm$ 6.73E-04} \\ 0.12 $\pm$ 3.46E-03\\ 0.20 $\pm$ 3.04E-03 \\ 0.22 $\pm$ 2.01E-03\end{tabular} \\ \hline
-instance 14                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.84 $\pm$ 0.015} \\ 0.59 $\pm$ 0.009\\ 0.53 $\pm$ 0.002\\ 0.57 $\pm$ 0.003\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{3.66E-03 $\pm$ 1.75E-03} \\ 0.13 $\pm$ 3.85E-03\\ 0.22 $\pm$ 3.24E-03 \\ 0.25 $\pm$ 1.83E-03\end{tabular} \\ \hline
+instance 8                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.87 $\pm$ 0.015} \\ 0.63 $\pm$ 0.008\\ 0.59 $\pm$ 0.005\\ 0.67 $\pm$ 0.007\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{8.77E-03 $\pm$ 1.90E-03} \\ 0.12 $\pm$ 5.81E-03\\ 0.19 $\pm$ 6.17E-03 \\ 0.27 $\pm$ 5.86E-03\end{tabular} \\ \hline
+instance 9                       & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.86 $\pm$ 0.016} \\ 0.62 $\pm$ 0.009\\ 0.56 $\pm$ 0.004\\ 0.63 $\pm$ 0.005\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{3.58E-03 $\pm$ 1.53E-03} \\ 0.11 $\pm$ 5.33E-03\\ 0.17 $\pm$ 3.56E-03 \\ 0.22 $\pm$ 3.22E-03\end{tabular} \\ \hline
+instance 10                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.83 $\pm$ 0.012} \\ 0.60 $\pm$ 0.008\\ 0.55 $\pm$ 0.005\\ 0.6 $\pm$ 0.005\end{tabular}  & \begin{tabular}[c]{@{}c@{}}\textbf{4.30E-03 $\pm$ 1.75E-03} \\ 0.11 $\pm$ 4.97E-03\\ 0.19 $\pm$ 5.62E-03 \\ 0.25 $\pm$ 3.91E-03\end{tabular} \\ \hline
+instance 11                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.82 $\pm$ 0.012} \\ 0.59 $\pm$ 0.009\\ 0.53 $\pm$ 0.003\\ 0.56 $\pm$ 0.003\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{5.19E-03 $\pm$ 1.81E-03} \\ 0.12 $\pm$ 4.22E-03\\ 0.20 $\pm$ 2.74E-03 \\ 0.24 $\pm$ 3.36E-03\end{tabular} \\ \hline
+instance 12                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.82 $\pm$ 0.01} \\ 0.60 $\pm$ 0.009\\ 0.53 $\pm$ 0.003\\ 0.57 $\pm$ 0.003\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{3.12E-03 $\pm$ 6.71E-04} \\ 0.12 $\pm$ 4.15E-03\\ 0.20 $\pm$ 3.08E-03 \\ 0.24 $\pm$ 2.50E-03\end{tabular} \\ \hline
+instance 13                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.86 $\pm$ 0.012} \\ 0.60 $\pm$ 0.008\\ 0.54 $\pm$ 0.003\\ 0.57 $\pm$ 0.004\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{2.63E-03 $\pm$ 6.73E-04} \\ 0.12 $\pm$ 3.46E-03\\ 0.20 $\pm$ 3.04E-03 \\ 0.22 $\pm$ 2.01E-03\end{tabular} \\ \hline
+instance 14                      & \begin{tabular}[c]{@{}l@{}}BMOPSOCD\\ BNSPSO\\ NSGA-II\\ BPSO\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{0.86 $\pm$ 0.015} \\ 0.61 $\pm$ 0.009\\ 0.54 $\pm$ 0.002\\ 0.57 $\pm$ 0.003\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{3.66E-03 $\pm$ 1.75E-03} \\ 0.13 $\pm$ 3.85E-03\\ 0.22 $\pm$ 3.24E-03 \\ 0.25 $\pm$ 1.83E-03\end{tabular} \\ \hline
 \end{tabular}
 \end{subtable}
 
@@ -1030,59 +1030,59 @@ instance 14 & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{
    \caption{MOPSOCD, BNSPSO, NSGA-II, and BPSO Experiments: The non-dominated solutions
 among the sets obtained by 40 independent runs of different algorithms}
    \centering
-   \begin{subfigure}{0.2\linewidth}
+   \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total1.png}
     \caption{instance 1}
    \end{subfigure}
-   \begin{subfigure}{0.2\linewidth}
+   \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total2.png}
     \caption{instance 2}
    \end{subfigure}
-   \begin{subfigure}{0.2\linewidth}
+   \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total3.png}
     \caption{instance 3}
    \end{subfigure}
-      \begin{subfigure}{0.2\linewidth}
+      \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total4.png}
     \caption{instance 4}
    \end{subfigure}
-      \begin{subfigure}{0.2\linewidth}
+      \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total5.png}
     \caption{instance 5}
    \end{subfigure}
-   \begin{subfigure}{0.2\linewidth}
+   \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total6.png}
     \caption{instance 6}
    \end{subfigure}
-   \begin{subfigure}{0.2\linewidth}
+   \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total7.png}
     \caption{instance 7}
    \end{subfigure}
-      \begin{subfigure}{0.2\linewidth}
+      \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total8.png}
     \caption{instance 8}
    \end{subfigure}
-      \begin{subfigure}{0.2\linewidth}
+      \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total9.png}
     \caption{instance 9}
    \end{subfigure}
-   \begin{subfigure}{0.2\linewidth}
+   \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total10.png}
     \caption{instance 10}
    \end{subfigure}
-   \begin{subfigure}{0.2\linewidth}
+   \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total11.png}
     \caption{instance 11}
    \end{subfigure}
-   \begin{subfigure}{0.2\linewidth}
+   \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total12.png}
     \caption{instance 12}
    \end{subfigure}
-      \begin{subfigure}{0.2\linewidth}
+      \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total13.png}
     \caption{instance 13}
    \end{subfigure}
-      \begin{subfigure}{0.2\linewidth}
+      \begin{subfigure}{0.21\linewidth}
        \includegraphics[width=\textwidth]{pics/total14.png}
     \caption{instance 14}
    \end{subfigure}
@@ -1131,14 +1131,14 @@ multi-objective model suits the problem well. The solutions contain a set of equ
 
 For example, a multi-objective algorithm gives a solution set contains many solutions, among them, solution A is \{cost: 1000, response time: 3.5s\}, solution B is \{cost: 500, response time: 15s\}, and solution C is \{cost:800, response time: 10s\}. And a single-objective algorithm gives a solution D: \{cost: 900, 12s\}. In this case, solution C better than solution D in both objectives (Cost: 800 $<$ 900, Response: 10s $<$ 12s).
 
-Meanwhile, If a service provider would like to provide the best service quality to customers without caring too much of the budget, then solution A is the most suitable choice. Conversely, a service provider with tight budget may choose solution C. 
+Meanwhile, if a service provider would like to provide the best service quality to customers without caring too much of the budget, then solution A is the most suitable choice. Conversely, a service provider with tight budget may choose solution C. 
 Service providers can balance their profit with our multi-objective model.
 % Both approaches can provide good results with reasonable time. Nevertheless, for linear aggregation approach, the solutions are not diverse enough for service providers. 
 
-We can see from previous example, a service provider can select a suitable solution if the solution set is diverse enough - a provider may have precise requirement (e.g. cost $<$ 525, response $<$ 14.5s). The new approach can provide a much more diverse solution set compared with our
+We can see from the previous example, a service provider can select a suitable solution if the solution set is diverse enough - a provider may have precise requirement (e.g. cost $<$ 525, response $<$ 14.5s). The new approach can provide a much more diverse solution set compared with our
 previous approaches including BPSO, BNSPSO, and NSGA-II (see Figure. \ref{fig:total}). This is a major contribution of this work.
 
-In addition, the major limitation of Integer Linear Programming is that the computational time increases rapidly when the size of the problem increases. Torrent-Fontbona et al. \cite{TorrentFontbona20134593} proposed a method that first uses clustering technique to reduce the complexity and then applies heuristic methods to solve the problem. It reduces the computation time as well as the quality of the solutions. However, our proposed algorithms can deal with large
+In addition, the major limitation of Integer Linear Programming is that the computational time increases rapidly when the size of the problem increases. Torrent-Fontbona et al. \cite{TorrentFontbona20134593} proposed a method that first uses clustering technique to reduce the complexity and then applied heuristic methods to solve the problem. It reduces the computation time as well as the quality of the solutions. However, our proposed algorithms can deal with large
 test instance with hundreds of services and more. Our BMOPSOCD shows none-degradation with increasing number of variables.
 
 
@@ -1150,7 +1150,7 @@ test instance with hundreds of services and more. Our BMOPSOCD shows none-degrad
 
 
 With the emergence of cloud computing, virtual machine allocation problem is becoming important for service providers and cloud providers. Instead of allocating web services to physical servers, web services are first allocated to virtual machines(VMs) and then VMs are allocated to physical machines. The problem of VM allocation is 
-similar to WSLAP with multiple objectives and binary VM allocation. Kessaci et al. \cite{6557869} proposed an MOGA-CB for minimizing the cost of VMs and response time when considering web service composition as a workflow. Phan et al. \cite{Phan8} proposed a framework called Green Monster, to dynamically move web services across Internet data centers for reducing their carbon footprint while maintaining their performance. Greenmonster applies a modified version of NSGA-II algorithm \cite{nsgaii} with an additional local search process. Our BMOPSOCD can solve VM allocation problem with minor modification of objective and constraint functions. Therefore, 
+similar to WSLAP with multiple objectives and binary VM allocation. Kessaci et al. \cite{6557869} proposed an MOGA-CB for minimizing the cost of VMs and response time when considering web service composition as a workflow. Phan et al. \cite{Phan8} proposed a framework called Green Monster, to dynamically move web services across Internet data centers for reducing their carbon footprint while maintaining their performance. Greenmonster applied a modified version of NSGA-II algorithm \cite{nsgaii} with an additional local search process. Our BMOPSOCD can solve VM allocation problem with minor modification of objective and constraint functions. Therefore, 
 BMOPSOCD is useful for Cloud providers.
 
 
@@ -1163,7 +1163,7 @@ This paper proposed a BMOPSOCD to solve the WSLAP with the aim of producing a se
 
 There are a few directions that we can work on in the future. Firstly, our model can be further improved by considering service composition. For now, the problem model considers each service as an atomic service. With the increasing usages of composite services composed with atomic services distributed over the Internet, we need to consider service composition workflow while solving WSLAP.   Service composition workflows have a significant impact on the allocation of atomic services because the data flow between services could not be neglected. Therefore, the location of each atomic service is highly related to the previous and the next service in a workflow.
 
-Secondly, more potential objectives need to be considered, for example, the availability problem. To avoid single point failure, web service providers often deploy many copies of the service in different candidate locations to keep the availability. 
+Secondly, more potential objectives need to be considered, for example, maximizing availability of services problem. To avoid single point failure, web service providers often deploy many copies of the service in different candidate locations to ensure the availability. 
 
 In addition, service deployment in Cloud becomes a hot topic between service computing and cloud computing. Cloud computing provides an elastic resource management for services so that it removes the burden of managing hardwares for service providers. However, new issues such as dynamic virtual machine placement for service composition, elastic resource management for services have emerged. Difficult (often NP-hard) and dynamic nature make it extremely challenging.
 % Green economy could also be considered. As the issue of global warming becomes a global challenge, deploying a service to a location that is closed to a power plant has been proposed in the literature . In addition, future work can consider multiple constraints such as the overall cost constraints and bandwidth constraints.
