@@ -9,6 +9,7 @@
 \usepackage{color}
 \usepackage{booktabs}
 \usepackage{bm}
+\usepackage{balance}
 %\usepackage{kbordermatrix}
 
 %\usepackage[para,online,flushleft]{threeparttable}
@@ -64,7 +65,7 @@ E-mail: \{boxiong.tan, hui.ma, yi.mei, mengjie.zhang\}@ecs.vuw.ac.nz}
 \thanks{Manuscript received x x, x; revised x x, x.}}
 
 % The paper headers
-\markboth{IEEE Transactions on Services Computing, ~Vol.~\textless XX\textgreater, No.~\textless 000\textgreater, \textless Month\textgreater~2017}%
+\markboth{IEEE Transactions on Services Computing, ~Vol.~\textless XX\textgreater, No.~\textless 000\textgreater, \textless Month\textgreater~2018}%
 {Boxiong \MakeLowercase{\textit{et al.}}: Evolutionary Multi-Objective Optimization for Web Service Location Allocation Problem}
 
 \vspace{-20 mm}
@@ -610,7 +611,7 @@ Explicitly, for comparing three variants of BMOPSOCD, we first find out the medi
 
 For comparing BMOPSOCD and other algorithms, we first aggregate the solutions from 40 runs and then apply an non-dominated sorting on the aggregated results to find the best results from that algorithm. Finally, we plot the solutions. 
 
-All fitness values are normalized between 0 and 1 with linear normalization method described in \cite{Tan2016}. 
+All fitness values are normalized between 0 and 1 with a linear normalization method described in \cite{Tan2016}. 
 The normalization method requires the maximum and minimum values of cost and response time 
 that we found during optimization. 
 
@@ -1171,28 +1172,31 @@ In addition, service deployment in Cloud becomes a hot topic between service com
 %\ifCLASSOPTIONcaptionsoff
  %\newpage
 %\fi
+
+
+
+\section*{Acknowledgment}
+This work is supported in part by the New Zealand Marsden Fund with the contract numbers (VUW1510 and VUW1614), administrated by the Royal Society of New Zealand.
+
 \vspace{-5 mm}
 \bibliographystyle{IEEEtran}
+\balance
 
 \bibliography{sample}
 \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photo/BoxiongTan}}]{Boxiong Tan}
-
-is a Ph.D student at the School of Engineering and Computer Science, Victoria University of
-Wellington, Wellington, New Zealand. He received B.E degree from Guangzhou University and M.E. degree from Victoria University of
+is a Ph.D. student at the School of Engineering and Computer Science, Victoria University of
+Wellington, Wellington, New Zealand. He received B.E degree from Guangzhou University and MCS degree from Victoria University of
 Wellington in 2011 and 2016 respectively.
 \end{IEEEbiography}
 \vspace{-9.5 mm}
 \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photo/HuiMa}}]{Hui Ma}
-is a Senior Lecturer at the School of Engineering and Computer Science, Victoria University of
-Wellington, Wellington, New Zealand. Her research interests include web information systems, distributed databases,
-and Cloud Computing.
+received her B.E. degree from Tongji University and her B.S. (Hons.), M.S. and Ph.D. degrees from Massay University. She is currently a Senior Lecturer in Software Engineering at Victoria University of Wellington. Her research interests include service computing, conceptual modelling, database systems, resource allocation in clouds, and evolutionary computation in combinatorial optimization. She has served as a PC member for about 60 international conferences, including seven times as a PC chair for conferences such as ER, DEXA, and APCCM. She is serving as a member of the ER steering committee and the IEEE CIS Emergent Technology technical committee.
 \end{IEEEbiography}
 \vspace{-9.5 mm}
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photo/YiMei}}]{Yi Mei}
-is   a   Lecturer   at   the   School   of   Engineering  and  Computer  Science,  Victoria  University
-of  Wellington,  Wellington,  New  Zealand.  His  research interests include evolutionary computation in
-scheduling, combinatorial optimization, and genetic
-programming. 
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photo/YiMei}}]{Yi Mei} (M’09)
+is a lecturer at the School of Engineering and Computer Science, Victoria University of Wellington, Wellington, New Zealand. He received his BSc and PhD degrees from University of Science and Technology of China in 2005 and 2010, respectively. His research interests include evolutionary computation in scheduling, routing and combinatorial optimization, as well as evolutionary machine learning, hyper-heuristics, genetic programming, feature selection and dimensional reduction.
+
+Yi has more than 60 fully referred publications, including the top journals in EC and Operations Research (OR) such as IEEE TEVC, IEEE Transactions on Cybernetics, European Journal of Operational Research, ACM Transactions on Mathematical Software, and top EC conferences (GECCO). As the sole investigator, he won the 2nd prize of the Competition at IEEE WCCI 2014: Optimization of Problems with Multiple Interdependent Components. He serves as a Vice-Chair of the IEEE CIS Emergent Technologies Technical Committee, and a member of three IEEE CIS Task Forces and two IEEE CIS Technical Committees. He is an Editorial Board Member of International Journal of Bio-Inspired Computation, and a guest editor of a special issue of the Genetic Programming Evolvable Machine journal. He has organized a number of special sessions in international conferences such as IEEE CEC. He serves as a reviewer of over 25 international journals including the top journals in EC and OR.
 % As  the  sole
 % investigator, he won the 2nd prize of the Competition at IEEE WCCI 2014: Optimisation  of  Problems  with  Multiple  Interdependent  Components.  He
 % received  the  2010  Chinese  Academy  of  Sciences  Dean's  Award  (top 200 postgraduates all over China) and the 2009 IEEE Computational Intelligence
@@ -1201,11 +1205,12 @@ programming.
 % IEEE  CIS  Task  Force  on  Large  Scale  Global  Optimisation. 
 \end{IEEEbiography}
 \vspace{-9.5 mm}
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photo/MengjieZhang}}]{Mengjie Zhang}
-He is currently Professor of
-Computer Science, Head of the Evolutionary Computation Research Group, and the Associate Dean
-(Research  and  Innovation)  in  the  Faculty  of  Engineering, Victoria University of Wellington. His current research interests include evolutionary computation,
-particularly genetic programming, particle swarm optimization.
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photo/MengjieZhang}}]{Mengjie Zhang} (M’04-SM’10)
+received the B.E. and M.E. degrees from Artificial Intelligence Research Center, Agricultural University of Hebei, Hebei, China, and the Ph.D. degree in computer science from RMIT University, Melbourne, Australia, in 1989, 1992, and 2000, respectively.
+
+Since 2000, he has been with the Victoria University of Wellington, Wellington, New Zealand, where he is currently Professor of Computer Science, the Head of the Evolutionary Computation Research Group, and Associate Dean (Research and Innovation) in the Faculty of Engineering. His current research interests include artificial intelligence, machine learning and big data, particularly in evolutionary computation and learning, genetic programming, image analysis, feature selection and big dimensionality reduction, evolutionary scheduling and combinatorial optimization, and evolutionary deep learning and transfer learning. He has published over 450 research papers in refereed international journals and conferences.
+
+Mengjie is a Fellow of Royal Society of New Zealand, and has been serving as an Associated Editor for over ten international journals (including IEEE Transactions on Evolutionary Computation, IEEE Transactions on Cybernetics, Evolutionary Computation Journal, and IEEE Transactions on Emergent Topics in CI) and as a Reviewer of over 30 international journals. He has been serving as a Steering Committee Member and a Program Committee Member for over 100 international conferences. He has supervised over 50  postgraduate research students. He is the Chair of the IEEE CIS Intelligent Systems and Applications Technical Committee, an Immediate Past Chair of the IEEE CIS Evolutionary Computation Technical Committee, a Vice-Chair of the IEEE CIS Task Force on Evolutionary Computer Vision and Image Processing, a Vice-Chair of the IEEE CIS  Task Force on Evolutionary Computation for Feature Selection and Construction, a member of IEEE CIS Task Force of Hyper-heuristics, and the Founding Chair for IEEE Computational Intelligence Chapter in New Zealand.
 \end{IEEEbiography}
 
 

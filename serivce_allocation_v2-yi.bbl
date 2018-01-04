@@ -104,11 +104,8 @@ C.~R. Raquel and P.~C. Naval, ``{An effective use of crowding distance in
   Optimisation}}, 2003.
 
 \bibitem{7360024}
-\BIBentryALTinterwordspacing
 N.~Riquelme, C.~{Von Lucken}, and B.~Baran, ``{Performance metrics in
-  multi-objective optimization},'' oct 2015, pp. 1--11. [Online]. Available:
-  \url{http://ieeexplore.ieee.org/document/7360024/}
-\BIBentrySTDinterwordspacing
+  multi-objective optimization},'' oct 2015, pp. 1--11.
 
 \bibitem{nsgaii}
 K.~Deb, A.~Pratap, S.~Agarwal, and T.~Meyarivan, ``{A fast and elitist

@@ -8,7 +8,7 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: sample.bib
-Repeated entry---line 1337 of file sample.bib
+Repeated entry---line 1336 of file sample.bib
  : @inproceedings{5961695
  :                       ,
 I'm skipping whatever remains of this entry
@@ -39,15 +39,15 @@ Warning--empty booktitle in Phan8
 Done.
 You've used 45 entries,
             4087 wiz_defined-function locations,
-            1094 strings with 15337 characters,
-and the built_in function-call counts, 36943 in all, are:
-= -- 2992
+            1093 strings with 15293 characters,
+and the built_in function-call counts, 36904 in all, are:
+= -- 2986
 > -- 803
 < -- 378
 + -- 451
 - -- 121
-* -- 1758
-:= -- 5339
+* -- 1753
+:= -- 5325
 add.period$ -- 98
 call.type$ -- 45
 change.case$ -- 40
@@ -56,20 +56,20 @@ cite$ -- 65
 duplicate$ -- 2581
 empty$ -- 2952
 format.name$ -- 155
-if$ -- 8677
+if$ -- 8671
 int.to.chr$ -- 0
 int.to.str$ -- 45
 missing$ -- 422
-newline$ -- 160
+newline$ -- 158
 num.names$ -- 44
-pop$ -- 972
+pop$ -- 973
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 2892
+skip$ -- 2889
 stack$ -- 0
 substring$ -- 2034
-swap$ -- 2199
+swap$ -- 2198
 text.length$ -- 94
 text.prefix$ -- 0
 top$ -- 5
@@ -77,5 +77,5 @@ type$ -- 45
 warning$ -- 20
 while$ -- 198
 width$ -- 47
-write$ -- 456
+write$ -- 453
 (There was 1 error message)
