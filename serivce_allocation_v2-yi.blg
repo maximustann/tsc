@@ -8,74 +8,67 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: sample.bib
-Repeated entry---line 1336 of file sample.bib
- : @inproceedings{5961695
- :                       ,
+I was expecting a `,' or a `}'---line 350 of file sample.bib
+ : 
+ : title = {{QoS computation and policing in dynamic web service selection}},
+(Error may have been on previous line)
 I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 567 of file sample.bib
+ : 
+ : year = {2011}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "Tan2016" isn't style-file defined
+--line 1527 of file sample.bib
+Warning--entry type for "Tan2016a" isn't style-file defined
+--line 1542 of file sample.bib
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
-Warning--empty booktitle in Dan:2008
-Warning--empty booktitle in 916684
 Warning--empty booktitle in Multiobjective
-Warning--missing publisher in Tan2016a
-Warning--missing publisher in Tan2016
-Warning--empty booktitle in Raquel
-Warning--empty booktitle in 7360024
-Warning--empty booktitle in kim2004spea2
 Warning--empty booktitle in kennedy2011particle
-Warning--empty booktitle in Kennedy:1997hd
-Warning--empty booktitle in NSPSO
-Warning--empty booktitle in Micro
-Warning--empty booktitle in khanesar2007novel
-Warning--empty booktitle in 1004478
-Warning--empty booktitle in Service_dataset
-Warning--empty booktitle in 1501598
-Warning--empty booktitle in xin2009particle
-Warning--empty booktitle in 5961695
-Warning--empty booktitle in 6557869
-Warning--empty booktitle in Phan8
+Warning--empty year in 5961695
 
 Done.
-You've used 45 entries,
+You've used 46 entries,
             4087 wiz_defined-function locations,
-            1093 strings with 15293 characters,
-and the built_in function-call counts, 36904 in all, are:
-= -- 2986
-> -- 803
-< -- 378
-+ -- 451
-- -- 121
-* -- 1753
-:= -- 5325
-add.period$ -- 98
-call.type$ -- 45
-change.case$ -- 40
-chr.to.int$ -- 852
-cite$ -- 65
-duplicate$ -- 2581
-empty$ -- 2952
-format.name$ -- 155
-if$ -- 8671
+            1131 strings with 16582 characters,
+and the built_in function-call counts, 40458 in all, are:
+= -- 3312
+> -- 872
+< -- 427
++ -- 494
+- -- 126
+* -- 1944
+:= -- 5804
+add.period$ -- 101
+call.type$ -- 46
+change.case$ -- 44
+chr.to.int$ -- 996
+cite$ -- 49
+duplicate$ -- 2798
+empty$ -- 3210
+format.name$ -- 162
+if$ -- 9554
 int.to.chr$ -- 0
-int.to.str$ -- 45
-missing$ -- 422
-newline$ -- 158
-num.names$ -- 44
-pop$ -- 973
+int.to.str$ -- 46
+missing$ -- 451
+newline$ -- 161
+num.names$ -- 46
+pop$ -- 986
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 2889
+skip$ -- 3130
 stack$ -- 0
-substring$ -- 2034
-swap$ -- 2198
-text.length$ -- 94
+substring$ -- 2362
+swap$ -- 2443
+text.length$ -- 95
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 45
-warning$ -- 20
-while$ -- 198
-width$ -- 47
-write$ -- 453
-(There was 1 error message)
+type$ -- 46
+warning$ -- 3
+while$ -- 212
+width$ -- 48
+write$ -- 482
+(There were 2 error messages)
