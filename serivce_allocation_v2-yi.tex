@@ -1,8 +1,8 @@
 \documentclass[10pt,journal,compsoc]{IEEEtran}
 
 \usepackage{graphicx,amsmath,amsfonts,amstext,float,mathtools,hyperref,multicol,array,amssymb}
-%\usepackage[ruled,vlined]{algorithm2e}
 
+%\usepackage[ruled,vlined]{algorithm2e}
 \usepackage{algorithm, algpseudocode}
 %\usepackage{psfig)
 \usepackage{soul}
@@ -145,10 +145,12 @@ The overall goal is to develop a new binary multi-objective PSO-based approach t
 \subsection{Multi-Objective Optimization}
 
 A multi-objective optimization problem consists of multiple objective functions. It can be stated as follows:
+\begin{small}
 \begin{align}
 \min \ \ & \vec{f}(\vec{x}) = (f_1(\vec{x}), \dots, f_m(\vec{x})), \\
 s.t. \ \ & \vec{x} \in \Omega.
 \end{align}
+\end{small}
 where $\Omega$ stands for the feasible region of $\vec{x}$.
 
 The objective functions $(f_1(\vec{x}), \dots, f_m(\vec{x}))$ are assumed to be conflicting, i.e. no single solution can achieve the optimal value for all the objective functions. In this case, the goal is to find a set of \emph{Pareto-optimal} solutions. First, we introduce the concept of the \emph{dominance relation} between solutions in multi-objective optimization.
@@ -185,20 +187,19 @@ Kennedy and Eberhart proposed PSO in 1995 \cite{kennedy2011particle}. It is a me
 
 At the initial state, each particle has a random initial position in the search space which is represented by a vector $\vec{x}_i = (x_{i1}, x_{i2}, \dots, x_{iD})$, where \emph{D} is the dimension of the search space. A particle has a velocity as $\vec{v}_i = (v_{i1}, v_{i2}, \dots, v_{iD})$. The velocity is limited by a threshold $v_{\max}$ so that for any $i$ and $d$, $v_{id} \in [-v_{\max}, v_{\max}]$. During the search process, each particle maintains a record of its best position so far, called the \emph{personal best} ($pbest$). The best positions among all the personal best positions of its neighbors is the \emph{global best} ($gbest$). The position and velocity of each particle are updated according to the following equations:
 \vspace{-1 mm}
-\small
+\begin{small}
 \begin{equation}
 \label{eq:updatePosition}
  x^{t+1}_{id} = x^{t}_{id} + v^{t+1}_{id},
 \end{equation}
-
-\vspace{-3 mm}
+\vspace{-10 mm}
 
 \begin{equation}
 % \footnotesize
 \label{eq:updateVelocity}
  v^{t+1}_{id} = w \cdot v^{t}_{id} + c_1 \cdot r_{1i} \cdot (p_{id} - x^t_{id}) + c_2 \cdot r_{2i} \cdot (p_{pg} - x^i_{id}).
 \end{equation}
-\normalsize
+\end{small}
 
 Here, $t$ is the index of iteration, $d$ is the index of dimension. The inertia weight $w$ is used to balance the local and global search abilities. The parameters $c_1$ and $c_2$ are the acceleration constants. $r_{1i}$ and $r_{2i}$ are random constants following the uniform distribution in the interval $[0, 1]$. $p_{id}$ and $p_{gd}$ denote the values of $pbest$ and $gbest$ in the $d^{th}$ dimension of the $i^{th}$ particle.
 
@@ -226,7 +227,7 @@ We consider a set of user centers $\mathcal{U }= \{U_1, \dots, U_m \}$ and a set
 % Another assumption is that a service provider would conduct this optimization process periodically to overcome the demand changing of services as well as the structural changing of network topology. 
 We use a \emph{service location matrix} $X = [X_{ij}]$ to represent the location allocation plan, where $X_{ij}$ represents whether a service $W_i$ is deployed at a candidate location $A_j$. WSLAP allocates a set of services $\mathcal{W} = \{ W_1, W_2, \dots,  W_s\}$  to a set of candidate locations $\mathcal{A}= \{ A_1, A_2, \dots,  A_n \}$ so that the total deployment cost $f_1$ and response time $f_2$ are minimized. Total deployment cost $f_1$ and total network latency $f_2$ can be calculated as follows:
 
-\small
+\begin{small}
 \begin{equation} \label{eq:fit-cost}
 \begin{aligned}
 & & &  f_1 = \sum\limits_{i=1}^s \sum\limits_{j = 1}^n C_{ij} X_{ij},
@@ -238,22 +239,22 @@ We use a \emph{service location matrix} $X = [X_{ij}]$ to represent the location
 & & & f_2 = \sum\limits_{k=1}^m \sum\limits_{i=1}^s F_{ki} R_{ki},
 \end{aligned}
 \end{equation}
-\normalsize
+\end{small}
 
 
 \noindent where $X_{ij}$ takes 1 if service $W_i$ is allocated to location $A_j$, and 0 otherwise. $R_{ki}$ stands for the shortest response time of accessing service $W_i$ from user center $U_k$, which is calculated as
-\small
+\begin{small}
  \begin{equation}
  \label{eq:response}
   R_{ki} = \min\{L_{kj} \mid j \in \{1, 2, ..., n\} \text{ and } X_{ij} = 1\}
  \end{equation}
-\normalsize
+ \end{small}
 
 Here, $R_{ki}$ is represented by the smallest latency $L_{kj}$ chosen from deployed locations.
 
 WSLAP has the following two objective functions and one constraint.
 
-\small
+\begin{small}
 \begin{equation} \label{eq:cost}
 \begin{aligned}
 & {\text{minimize}}
@@ -276,7 +277,7 @@ WSLAP has the following two objective functions and one constraint.
 & & & x_{ij} \in {0, 1}, \forall i \in {1, \cdots, s}, \forall j \in {1, \cdots, n}
 \end{aligned}
 \end{equation}
-\normalsize
+\end{small}
 
 % In this paper, we will use the following matrices to model the above mentioned information.
 % \begin{center}
@@ -301,7 +302,7 @@ To solve the WSLAP we aim to find an allocation matrix $X = [X_{ij}]$ such that 
 
 For example, assume we are given the service invocation frequency matrix $F$, latency matrix $L$, deployment cost matrix $C$, and the allocation matrix $X$ as follows, we will show how to calculate the overall deployment cost and network latency.
 
-\small
+\begin{small}
 \noindent\parbox{.45\linewidth}{
  {\centering
 %   \begin{equation*}
@@ -359,30 +360,30 @@ C = \bbordermatrix{~ & A_{1} & A_{2} & A_{3}\cr
 \end{equation*}
  \\}
  }
- \normalsize
+ \end{small}
 
 The calculation of the overall deployment cost sums up the deployment costs of all the deployments.
-\small
+\begin{small}
 \begin{align*}
 f_1 & = \sum\limits_{i=1}^s \sum\limits_{j = 1}^n C_{ij} X_{ij}\\
 & = C_{11} X_{11} + C_{12} X_{12} + C_{13} X_{13} + ... + C_{33} X_{33} \\
 & = 120 + 43 + 27 + 46 \\
 & = 236
 \end{align*}
- \normalsize
+ \end{small}
 
 To calculate the overall network latency, we need to first calculate the response time matrix $R$ using the matrices $L$ and $X$. For each service $W_i$, by checking matrix $X$, we found out which locations the service has been deployed in. Then, we check matrix $L$ to find out the corresponding latency from each deployed location $A_j$ to each user center $U_k$. Finally, the smallest latency is selected to be the response time from each service $W_i$ to each user center $U_k$. In the above example, the corresponding response matrix is
-\small
+\begin{small}
 $$
 R = \bbordermatrix{~ & W_{1} & W_{2} & W_{3}\cr
 	U_{1}	&0 &2.8 &2.8	\cr
 	U_{2}	&2.8  &0 &0	\cr
 	U_{3}	&0.8 &1.2 &1.2	\cr}
 $$
-\normalsize
+\end{small}
 
 Finally, we can calculate the overall network latency as
-\small
+\begin{small}
 \begin{equation*}
 \begin{aligned}
 f_2 & = \sum\limits_{k=1}^m \sum\limits_{i=1}^s F_{ki} R_{ki}\\
@@ -391,7 +392,7 @@ f_2 & = \sum\limits_{k=1}^m \sum\limits_{i=1}^s F_{ki} R_{ki}\\
   &= 591.6
 \end{aligned}
 \end{equation*}
-\normalsize
+\end{small}
 
 
 The constraint requires a web service is at least deployed to one location. The example matrix $X$ above satisfies the constraint.
@@ -405,7 +406,7 @@ This section presents the proposed BMOPSOCD. We first define the representation 
 \subsection{Particle Representation}
 A solution for WSLAP is a $s \times n$ allocation matrix $X =[X_{ij}]$. We need to transform the $s \times n$ matrix into a vector $y$ in order to use PSO to generate vector-based solutions. The element $X_{ij}$ in $X$ corresponds to the $ (n \cdot (i-1) +j)^{th}$ element in $Y$. Also, for continuous PSO, each element of a particle takes value from 0 to 1, i.e., $0 \leq  Y_u  \leq 1$. For example, the following $3 \times 3$ matrix
 
-\small
+\begin{small}
 \begin{equation*}
 \begin{aligned}
  X = \bbordermatrix{~ & A_{1} & A_{2} & A_{3} \cr
@@ -414,23 +415,17 @@ A solution for WSLAP is a $s \times n$ allocation matrix $X =[X_{ij}]$. We need 
       W_{3} &0.76 &0.64 &0.27 \cr}\\
 \end{aligned}
 \end{equation*}\\
-\normalsize
+\end{small}
 can be transformed into a vector:
-\small
+\begin{small}
 $$
 Y = [0.12, 0.87, 0.42, 0.07, 0.32, 0.95, 0.76, 0.64, 0.27].
 $$
-\normalsize
+\end{small}
 
 % As we know that the final output of WSLAP is an allocation matrix $X_{ij}$, the particle with the continuous representation needs to be transformed into the binary representation. 
 To transform continuous particle representation to binary form, rounding functions can be applied. The choice of the rounding function plays an important role in the quality of the final results. The following sections discuss different rounding methods. Note that the vector $Y$ is used in the evolution of PSO. During the fitness evaluation phase, each $Y$ is first decoded into a matrix $X$. Then, a rounding function is used to round $X$ into a binary representation. At last, the evaluation is processed on binary solutions.
 
-% \begin{figure}[H]
-% \centering
-%   \includegraphics[width=0.35\textwidth]{pics/flatten.eps}
-%   \caption{BMOPSOCD particle representation}
-%   \label{fig:flatten}
-% \end{figure}
 
 \vspace{-3 mm}
 \subsection{Rounding Functions}
@@ -455,8 +450,8 @@ The rounding function maps real values to binary values. The common strategy is 
 
 The static rounding function is shown in Equation \ref{eq:1}: a parameter threshold $\theta$ is introduced to round up or round down a particle entry $X'_{ij}$.
 The threshold value $\theta$ is ad-hoc and is usually set based on empirical study.
+\begin{small}
  \begin{equation}
-\footnotesize
   \label{eq:1}
   X_{ij} =
   \begin{cases}
@@ -464,13 +459,14 @@ The threshold value $\theta$ is ad-hoc and is usually set based on empirical stu
    0 & \quad \text{otherwise} \\
   \end{cases}
  \end{equation}
+ \end{small}
 \vspace{-5 mm}
 
 \subsubsection{Dynamic Rounding Functions}
 \label{sec:dynamic}
 The threshold plays an important role in searching for solutions for a given problem \cite{Tan2016a}. The static rounding function has the following drawbacks. Firstly, it needs to be predefined and problem specific. It is hard to estimate the effect of $\theta$ before observing results. Secondly, the influence of different threshold values is not completely studied. Therefore, we propose dynamic rounding functions two steps. First, the function adjusts the value of threshold $\theta$ according to two predefined parameters: a lower bound $l$ and an upper bound $u$ of the threshold ($l < u$), and a dynamic parameter: the current generation $t$. The second step either rounds up or down the value of $X_{ij}$ according to $\theta$. Three dynamic rounding functions: \emph{Linear function}, \emph{Quadratic function} and \emph{Reciprocal function} are considered. Specifically, current generation $t$ cannot equal $max\_gen$ in order to keep the result valid. 
 \vspace{-3 mm}
-\small
+\begin{small}
 \begin{equation}
 \label{eq:linear}
  \theta_{linear} = \frac{l - u}{\text{max\_gen}} t + u
@@ -483,7 +479,7 @@ The threshold plays an important role in searching for solutions for a given pro
 \label{eq:reciprocal}
  \theta_{recip} = u - \frac{u - l}{\text{max\_gen} - t}  (t \neq \text{max\_gen})
 \end{equation}
-\normalsize
+\end{small}
 The reason that we design three dynamic functions is to compare the impact of different trajectories of dynamic thresholds (see Figure \ref{fig:dynamic}. 
 % the three dynamic functions' trajectories are shown in Figure \ref{fig:dynamic} with $l$ being set to 0.3, $u$ being set to 0.7, and $max\_gen$ being set to 50 as an example. The principle for setting the lower and upper bound is based on the empirical study of static rounding function in Section \ref{sec:result_static}. 
 The threshold values with a Linear function are uniformly distributed, whereas Reciprocal and Quadratic functions are unevenly distributed. The performances of these rounding functions are studied in Section \ref{sec:expdy}. 
@@ -518,11 +514,11 @@ The Stepped rounding function is shown in Equation \ref{eq:transfer} where $\the
 \begin{figure}[H]
  \centering
    \includegraphics[width=0.4\textwidth]{pics/transfer.eps}
-   \caption{Evolutionary process with a Stepped rounding function}
+   \caption{Evolutionary process with the Stepped rounding function}
    \label{fig:adaptive}
  \end{figure}
 
-\small
+\begin{small}
 \begin{equation}
 \label{eq:transfer}
   \theta =
@@ -531,7 +527,7 @@ The Stepped rounding function is shown in Equation \ref{eq:transfer} where $\the
    \theta' & \quad \text{otherwise} \\
   \end{cases}
 \end{equation}
-\normalsize
+\end{small}
 
 \vspace{-3 mm}
 \subsection{Fitness Function and Constraint Handling}
@@ -609,10 +605,11 @@ The selection of $pbest$ and $gbest$ is one of the key steps in BMOPSOCD. $pbest
 \end{algorithm}
 
 The fitness of particles can be evaluated using the objective functions presented in Equation  \ref{eq:fit-cost} and \ref{eq:fit-latency}. Line 12 updates velocity $v_i$ as:
+\begin{small}
 \begin{equation}
-\footnotesize
  v_{id} = w * v_{id} + c_1 * r_{1i} * (p_{id} - x_{id}) + c_2 * r_{2i} * (p_{pg} - x_{id})
 \end{equation}
+\end{small}
 \noindent where $w$ is the inertia weight, $c_1$ and $c_2$ are the acceleration factors, $r_{1i}$ and $r_{2i}$ are the random variables sampled from the uniform distribution between 0 and 1, $v_{id}, x_{id}, p_{id}$ and $g_{d}$ denote the value in dimension $d$ of $\vec{v_i}, \vec{x_i},\vec{p_i}$ and $\vec{g}$, respectively.  Note that the main difference between our algorithm and the original \cite{Raquel} are in Lines 3 and 16, which is the use of rounding function. For WSLAP, the decision variable is binary. Therefore, in our algorithm (Line 3 and 16) we apply a rounding function to transform continuous values to binary values.
 
 The mutation operator (Line 15) changes the value of each dimension of an individual according to a nonlinear function \cite{1304847}. The nonlinear function is related to the total number of iteration and the current number of iteration. The mutation operator is designed to increase the diversity of the initial population.
@@ -668,7 +665,7 @@ contains only the latencies between candidate locations and user centers, but la
 \begin{table}[h]
 \footnotesize
 \centering
-\scalebox{0.75}{
+\scalebox{0.8}{
 \begin{tabular}{l|c|c|c|c}
 \hline
 Test instances   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No. of \\ Services\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No. of \\ Candidate Locations\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}No. of \\ user centers\end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}Size of \\ search space\end{tabular}}\\ \hline
@@ -718,7 +715,7 @@ For each experiment, the proposed algorithm was run for 40 times independently. 
 % \usepackage{booktabs}
 \begin{table}[]
 \centering
-\scalebox{0.75}{
+\scalebox{0.8}{
 \begin{tabular}{@{}cccc@{}}
 \toprule
 Parameter & value & Parameter          & value  \\ \midrule
@@ -824,7 +821,7 @@ Figure \ref{fig:dynamicFunctions} shows that the Reciprocal function slightly do
        \includegraphics[width=\textwidth]{pics/dynamic_problem_5.png}
     \caption{instance 5}
    \end{subfigure}
-   \caption{Dynamic Rounding Function Experiments : The non-dominated solutions among the sets obtained by 40 independent runs of BMOPSOCD with different dynamic functions. The dashed-vertical lines mark the missing solutions from Reciprocal function.}
+   \caption{Dynamic Rounding Function Experiments : The non-dominated solutions among the sets obtained by 40 independent runs of BMOPSOCD with different dynamic functions. The dashed-vertical lines mark the missing solutions from the Reciprocal function.}
    \label{fig:dynamicFunctions}
 \end{figure}
 
@@ -832,7 +829,7 @@ Figure \ref{fig:dynamicFunctions} shows that the Reciprocal function slightly do
 \begin{table}[H]
 \centering
 \footnotesize
-\scalebox{0.75}{
+\scalebox{0.8}{
 \begin{tabular}{l|c|c|c}
 \hline
           & \multicolumn{1}{l|}{Linear} & \multicolumn{1}{l|}{Quadratic} & \multicolumn{1}{l}{Reciprocal}  \\ \hline
@@ -876,7 +873,7 @@ Overall, the performance of the Stepped rounding function is very close to the R
                                                                                                             & Reciprocal                                                                                                                                     & Stepped                                                                                                                     \\ \hline
 \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}instance 2\\ instance 3\\ instance 4\\ instance 5\end{tabular}} & \begin{tabular}[c]{@{}c@{}}\textbf{0.74 $\pm$ 0.013} \\ 0.815 $\pm$ 0.013\\ \textbf{0.87 $\pm$ 0.014} \\ \textbf{0.86 $\pm$ 0.020}  \end{tabular} & \begin{tabular}[c]{@{}c@{}}0.72 $\pm$ 0.011\\  \textbf{0.83 $\pm$ 0.014} \\ 0.85 $\pm$ 0.014\\ 0.85 $\pm$ 0.022\end{tabular} \\ \hline
 \end{tabular}}
-\caption{A comparison between Reciprocal function and Stepped function, the mean and standard deviation of HyperVolume values over the 40 independent runs}
+\caption{A comparison between the Reciprocal function and the Stepped function, the mean and standard deviation of HyperVolume values over the 40 independent runs}
 \label{tab:transfercomp}
 \end{table}
 
@@ -900,7 +897,7 @@ Overall, the performance of the Stepped rounding function is very close to the R
        \includegraphics[width=\textwidth]{pics/transfer_problem5.png}
     \caption{instance 5}
    \end{subfigure}
-   \caption{Stepped Rounding Function Experiments: The non-dominated solutions among the sets obtained by 40 independent runs of Stepped function and Reciprocal
+   \caption{The Stepped Rounding Function Experiments: The non-dominated solutions among the sets obtained by 40 independent runs of the Stepped function and the Reciprocal
    function}
    \label{fig:transfer}
 \end{figure}
@@ -931,7 +928,7 @@ However, the method takes five times longer than using the Reciprocal function.
     \caption{instance 5}
    \end{subfigure}
    \caption{Combination of Static Function Experiments:  The non-dominated solutions among
-the sets obtained by 40 independent runs of combination of static thresholds and Reciprocal function}
+the sets obtained by 40 independent runs of combination of static thresholds and the Reciprocal function}
    \label{fig:combination}
 \end{figure}
 
@@ -1017,42 +1014,45 @@ The reason is the velocity and position calculation (Equation \ref{eq:updatePosi
 %   \label{fig:final_time}
 % \end{figure}
 
+
 \begin{table*}[th]
 \centering
 \footnotesize
-\scalebox{0.75}{
+\scalebox{0.8}{
 
-\begin{subtable}{.43\textwidth}
+\begin{subtable}{.6\textwidth}
 \centering
-\begin{tabular}{|l|c|c|}
+\begin{tabular}{lllll}
 \hline
-           & method                                                                   & time (avg $\pm$ sd)                                                                                                                           \\ \hline
-instance 1  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}17.99 $\pm$ 0.26 \\ \textbf{12.98 $\pm$ 0.18}\\ 19.00 $\pm$ 0.17 \\ 15.35 $\pm$ 0.15\end{tabular}                    \\ \hline
-instance 2  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}23.55 $\pm$ 0.27 \\ 16.18 $\pm$ 0.26\\ 25.52 $\pm$ 0.27 \\ \textbf{15.38 $\pm$ 0.31}\end{tabular}                    \\ \hline
-instance 3  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}103.65 $\pm$ 1.87 \\ 94.98 $\pm$ 7.28 \\ 111.86 $\pm$ 1.11 \\ \textbf{74.34 $\pm$ 0.61}\end{tabular}                 \\ \hline
-instance 4  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}181.20 $\pm$ 4.40 \\ 175.99 $\pm$ 9.67 \\ 182.09 $\pm$ 1.86 \\ \textbf{147.98 $\pm$ 1.30}\end{tabular}               \\ \hline
-instance 5  & \begin{tabular}[c]{@{}c@{}}BPSO\\ MOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}137.03 $\pm$ 0.87 \\ 89.74 $\pm$ 8.53 \\ 161.31 $\pm$ 0.95 \\ \textbf{84.17 $\pm$ 1.03}\end{tabular}                 \\ \hline
-instance 6  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}208.63 $\pm$ 2.23 \\ 172.80 $\pm$ 7.68 \\ 236.23 $\pm$ 2.72 \\ \textbf{157.52$\pm$ 1.62}\end{tabular}                \\ \hline
-instance 7  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}234.73 $\pm$ 6.42 \\ 202.68 $\pm$ 10.46 \\ 242.94 $\pm$ 9.00 \\ \textbf{159.26 $\pm$ 1.31}\end{tabular}              \\ \hline
+\multicolumn{1}{l|}{}           & BPSO            & BMOPSOCD         & BNSPSO          & NSGA-II         \\ \hline
+\multicolumn{1}{l|}{instance 1} & 17.99 $\pm$  0.26 & \textbf{12.98 $\pm$ 0.18}   & 19.00 $\pm$ 0.17  & 15.35 $\pm$ 0.15  \\ 
+\multicolumn{1}{l|}{instance 2} & 23.55 $\pm$ 0.27  & 16.18 $\pm$ 0.26   & 25.52 $\pm$ 0.27  & \textbf{15.38 $\pm$ 0.31}  \\
+\multicolumn{1}{l|}{instance 3} & 103.65 $\pm$ 1.87 & 94.98 $\pm$ 7.28   & 111.86 $\pm$ 1.11 & \textbf{74.34 $\pm$ 0.61}  \\
+\multicolumn{1}{l|}{instance 4} & 181.20 $\pm$ 4.40 & 175.99 $\pm$ 9.67  & 182.09 $\pm$ 1.86 & 147.98 $\pm$ 1.30 \\
+\multicolumn{1}{l|}{instance 5} & 137.03 $\pm$ 0.87 & 89.74 $\pm$ 8.53   & 161.31 $\pm$ 0.95 & \textbf{84.17 $\pm$ 1.03}  \\
+\multicolumn{1}{l|}{instance 6} & 208.63 $\pm$ 2.23 & 172.80 $\pm$ 7.68  & 236.23 $\pm$ 2.72 & \textbf{157.52 $\pm$ 1.62} \\
+\multicolumn{1}{l|}{instance 7} & 234.73 $\pm$ 6.42 & 202.68 $\pm$ 10.46 & 242.94 $\pm$ 9.00 & \textbf{159.26 $\pm$ 1.31} \\
+\hline
 \end{tabular}
 \end{subtable}
 
-\begin{subtable}{.43\linewidth}
+\begin{subtable}{.6\linewidth}
 \centering
-\begin{tabular}{|l|c|c|}
+\begin{tabular}{lllll}
 \hline
-           & method                                                                   & time (avg $\pm$ sd)                                                                                                                           \\ \hline
-instance 8  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}476.76 $\pm$ 22.40 \\ 531.64 $\pm$ 43.14 \\ 444.41 $\pm$ 22.86 \\ \textbf{375.05 $\pm$ 4.11}\end{tabular}            \\ \hline
-instance 9  & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}293.43 $\pm$ 3.01 \\ 198.81 $\pm$ 7.11 \\ 334.62 $\pm$ 2.81 \\ \textbf{181.30 $\pm$ 1.99}\end{tabular}               \\ \hline
-instance 10 & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}507.72 $\pm$ 4.19 \\ 449.91 $\pm$ 26.00 \\ 539.51 $\pm$ 4.06 \\ \textbf{381.18 $\pm$ 3.06}\end{tabular}              \\ \hline
-instance 11 & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}1,237.30 $\pm$ 42.06 \\ 1,262.79 $\pm$ 91.65\\ 1,328.17 $\pm$ 12.67 \\ \textbf{1,036.53 $\pm$ 35.38}\end{tabular}    \\ \hline
-instance 12 & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}3,631.14 $\pm$ 17.70 \\ 4,326.22 $\pm$ 478.14 \\ 3,395.47 $\pm$ 100.51 \\ \textbf{3,326.94 $\pm$ 38.21}\end{tabular} \\ \hline
-instance 13 & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}1,416.63 $\pm$ 0.26 \\ 1,155.21 $\pm$ 28.85 \\ 1,507.92 $\pm$ 25.74 \\ \textbf{1,098.08 $\pm$ 17.36}\end{tabular}    \\ \hline
-instance 14 & \begin{tabular}[c]{@{}c@{}}BPSO\\ BMOPSOCD\\ BNSPSO\\ NSGA-II\end{tabular} & \begin{tabular}[c]{@{}c@{}}3,617.53 $\pm$ 34.13 \\ \textbf{3,284.66 $\pm$ 124.13} \\ 3,759.51$\pm$ 61.49 \\ 3,372.53 $\pm$ 31.05 \end{tabular}   \\ \hline
+\multicolumn{1}{l|}{}            & BPSO              & BMOPSOCD           & BNSPSO             & NSGA-II           \\ \hline
+\multicolumn{1}{l|}{instance 8}  & 476.76 $\pm$ 22.40  & 531.64 $\pm$ 43.14   & 444.41 $\pm$ 22.86   & \textbf{375.05 $\pm$ 4.11}   \\ 
+\multicolumn{1}{l|}{instance 9}  & 293.43 $\pm$ 3.01   & 198.81 $\pm$ 7.11    & 334.62 $\pm$ 2.81    & \textbf{181.30 $\pm$ 3.06}   \\
+\multicolumn{1}{l|}{instance 10} & 507.72 $\pm$ 4.19   & 449.91 $\pm$ 26.00   & 539.51 $\pm$ 4.06    & \textbf{381.18  $\pm$ 3.06}  \\
+\multicolumn{1}{l|}{instance 11} & 1237.30 $\pm$ 42.06 & 1262.79 $\pm$ 91.65  & 1328.17 $\pm$ 12.67  & \textbf{1036.53 $\pm$ 35.38} \\
+\multicolumn{1}{l|}{instance 12} & 3631.14 $\pm$ 17.70 & 4326.22 $\pm$ 478.14 & 3395.47 $\pm$ 100.51 & \textbf{3326.94 $\pm$ 38.21} \\
+\multicolumn{1}{l|}{instance 13} & 1416.63 $\pm$ 26.60 & 1155.21 $\pm$ 28.85  & 1507.92 $\pm$ 25.74  & \textbf{1098.08 $\pm$ 17.36} \\
+\multicolumn{1}{l|}{instance 14} & 3617.53 $\pm$ 34.13 & \textbf{3284.66 $\pm$ 124.13} & 3759.51 $\pm$ 61.49  & 3372.53 $\pm$ 31.05 \\
+\hline
 \end{tabular}
 \end{subtable}
 }
-\caption{Execution time (seconds)}
+\caption{Execution time (average and standard deviation in seconds)}
 \label{tab:time}
 \end{table*}
 
@@ -1196,11 +1196,11 @@ This paper proposed a BMOPSOCD to solve the WSLAP with the aim of producing a se
 
 %The major contribution is that we provide a rounding function and an adaptive threshold technique to make a continuous algorithm compatible with a binary problem. These techniques can also be applied in other continuous algorithms. We have shown that BMOPSOCD can produce solutions with a good diversity that covers most of the Pareto front.
 
-There are a few directions that we can work on in the future. Firstly, our model can be further improved by considering service composition. For now, the problem model considers each service as an atomic service. With the increasing usages of composite services composed with atomic services distributed over the Internet \cite{6900416}, we need to consider service composition workflow while solving WSLAP.   Service composition workflows have a significant impact on the allocation of atomic services because the data flow between services could not be neglected. Therefore, the location of each atomic service is highly related to the previous and the next service in a workflow.
+There are a few directions that we can work on in the future. Firstly, our model can be further improved by considering service composition. For now, the problem model considers each service as an atomic service. With the increasing usages of composite services composed with atomic services distributed over the Internet \cite{6900416,Tan2017}, we need to consider service composition workflow while solving WSLAP.   Service composition workflows have a significant impact on the allocation of atomic services because the data flow between services could not be neglected. Therefore, the location of each atomic service is highly related to the previous and the next service in a workflow.
 
 Secondly, more potential objectives need to be considered, for example, maximizing availability of services. To avoid single point failure, web service providers often deploy many copies of service in different candidate locations to ensure the availability. 
 
-In addition, service deployment in Cloud becomes a hot topic between service computing and cloud computing. Cloud computing provides an elastic resource management for services so that it removes the burden of managing hardwares for service providers. However, new issues such as dynamic virtual machine placement for service composition, elastic resource management for services have emerged. Difficult (often NP-hard) and dynamic nature make it extremely challenging.
+In addition, service deployment in Cloud becomes a hot topic between service computing and cloud computing. Cloud computing provides an elastic resource management for services so that it removes the burden of managing hardwares for service providers. However, new issues such as dynamic virtual machine placement for service composition, elastic resource management for services have emerged \cite{7969618}. Difficult (often NP-hard) and dynamic nature make it extremely challenging.
 % Green economy could also be considered. As the issue of global warming becomes a global challenge, deploying a service to a location that is closed to a power plant has been proposed in the literature . In addition, future work can consider multiple constraints such as the overall cost constraints and bandwidth constraints.
 
 %\ifCLASSOPTIONcaptionsoff
@@ -1212,9 +1212,8 @@ In addition, service deployment in Cloud becomes a hot topic between service com
 \section*{Acknowledgment}
 This work is supported in part by the New Zealand Marsden Fund with the contract numbers (VUW1510 and VUW1614), administrated by the Royal Society of New Zealand.
 
-\vspace{-5 mm}
+
 \bibliographystyle{IEEEtran}
-% \balance
 
 \bibliography{sample}
 \small
@@ -1225,13 +1224,15 @@ Wellington in 2011 and 2016 respectively.
 \end{IEEEbiography}
 \vspace{-9.5 mm}
 \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photo/HuiMa}}]{Hui Ma}
-received her B.E. degree from Tongji University and her B.S. (Hons.), M.S. and Ph.D. degrees from Massay University. She is currently a Senior Lecturer in Software Engineering at Victoria University of Wellington. Her research interests include service computing, conceptual modelling, database systems, resource allocation in clouds, and evolutionary computation in combinatorial optimization. She has served as a PC member for about 60 international conferences, including seven times as a PC chair for conferences such as ER, DEXA, and APCCM. She is serving as a member of the ER steering committee and the IEEE CIS Emergent Technology technical committee.
+received her B.E. degree from Tongji University and her B.S. (Hons.), M.S. and Ph.D. degrees from Massay University. She is currently a Senior Lecturer in Software Engineering at Victoria University of Wellington. Her research interests include service computing, conceptual modelling, database systems, resource allocation in clouds, and evolutionary computation in combinatorial optimization.
+
+Hui has more than 80 publications, including leading journals and conferences in databases, service computing, evolutionary computation, and conceptual modelling, such as Journal of Heuristics, Data \& Knowledge Engineering (DKE), the International Conference on Conceptual Modeling (ER), and Genetic and Evolutionary Computation Conference (GECCO). She has served as a PC member for about 60 international conferences, including seven times as a PC chair for conferences such as ER, DEXA, and APCCM. She is serving as a member of the ER steering committee and the IEEE CIS Emergent Technology technical committee.
 \end{IEEEbiography}
 \vspace{-9.5 mm}
 \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photo/YiMei}}]{Yi Mei} (M’09)
 is a lecturer at the School of Engineering and Computer Science, Victoria University of Wellington, Wellington, New Zealand. He received his BSc and PhD degrees from University of Science and Technology of China in 2005 and 2010, respectively. His research interests include evolutionary computation in scheduling, routing and combinatorial optimization, as well as evolutionary machine learning, hyper-heuristics, genetic programming, feature selection and dimensional reduction.
 
-Yi has more than 60 fully referred publications, including the top journals in EC and Operations Research (OR) such as IEEE TEVC, IEEE Transactions on Cybernetics, European Journal of Operational Research, ACM Transactions on Mathematical Software, and top EC conferences (GECCO). As the sole investigator, he won the 2nd prize of the Competition at IEEE WCCI 2014: Optimization of Problems with Multiple Interdependent Components. He serves as a Vice-Chair of the IEEE CIS Emergent Technologies Technical Committee, and a member of three IEEE CIS Task Forces and two IEEE CIS Technical Committees. He is an Editorial Board Member of International Journal of Bio-Inspired Computation, and a guest editor of a special issue of the Genetic Programming Evolvable Machine journal. 
+Yi has more than 60 fully referred publications, including the top journals in EC and Operations Research (OR) such as IEEE TEVC, IEEE Transactions on Cybernetics, European Journal of Operational Research, ACM Transactions on Mathematical Software, and top EC conferences (GECCO). As the sole investigator, he won the 2nd prize of the Competition at IEEE WCCI 2014: Optimization of Problems with Multiple Interdependent Components. He serves as a Vice-Chair of the IEEE CIS Emergent Technologies Technical Committee, and a member of three IEEE CIS Task Forces and two IEEE CIS Technical Committees. He is an Editorial Board Member of International Journal of Bio-Inspired Computation, and a guest editor of a special issue of the Genetic Programming Evolvable Machine journal. He has organised a number of special sessions in international conferences such as IEEE CEC. He serves as a reviewer of over 25 international journals including the top journals in EC and OR.
 % He has organized a number of special sessions in international conferences such as IEEE CEC. He serves as a reviewer of over 25 international journals including the top journals in EC and OR.
 % As  the  sole
 % investigator, he won the 2nd prize of the Competition at IEEE WCCI 2014: Optimisation  of  Problems  with  Multiple  Interdependent  Components.  He
